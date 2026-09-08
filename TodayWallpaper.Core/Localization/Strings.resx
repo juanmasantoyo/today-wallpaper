@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- 1. MainWindow.xaml -->
+  <data name="APP_MAIN_WINDOW_TITLE" xml:space="preserve"><value>Today Wallpaper</value></data>
+  <data name="APP_TAB_SCHEDULE" xml:space="preserve"><value>Schedule</value></data>
+  <data name="APP_GROUP_SCHEDULE" xml:space="preserve"><value>Automatic Wallpaper Scheduling</value></data>
+  <data name="APP_CHECK_ENABLE_SCHEDULE" xml:space="preserve"><value>Enable automatic wallpaper scheduling</value></data>
+  <data name="APP_LABEL_CADENCE" xml:space="preserve"><value>Generation frequency:</value></data>
+  <data name="APP_RADIO_INTERVAL" xml:space="preserve"><value>Every</value></data>
+  <data name="APP_TEXT_HOURS_SUFFIX" xml:space="preserve"><value>hour(s) (1 - 24 h)</value></data>
+  <data name="APP_RADIO_DAILY" xml:space="preserve"><value>Every day at:</value></data>
+  <data name="APP_HINT_DAILY_FORMAT" xml:space="preserve"><value>(24h format, e.g. 17:00)</value></data>
+  <data name="APP_CHECK_RUN_ON_STARTUP" xml:space="preserve"><value>Check on startup</value></data>
+  <data name="APP_LABEL_LAST_GEN_PREFIX" xml:space="preserve"><value>Last generated wallpaper: </value></data>
+  <data name="APP_GROUP_VISUAL_STYLE" xml:space="preserve"><value>Visual Style &amp; Generation</value></data>
+  <data name="APP_LABEL_GENERATOR_STYLE" xml:space="preserve"><value>Generator style:</value></data>
+  <data name="APP_LABEL_PALETTE_MODE" xml:space="preserve"><value>Palette mode:</value></data>
+  <data name="APP_LABEL_HISTORY_MAX" xml:space="preserve"><value>Maximum history wallpapers:</value></data>
+  <data name="APP_BTN_SAVE_SCHEDULE" xml:space="preserve"><value>Save schedule</value></data>
+  <data name="APP_BTN_GENERATE_NOW" xml:space="preserve"><value>Generate now</value></data>
+  <data name="APP_TAB_LOCATION_WEATHER" xml:space="preserve"><value>Location &amp; Weather</value></data>
+  <data name="APP_GROUP_LOCATION" xml:space="preserve"><value>User Location Settings</value></data>
+  <data name="APP_RADIO_AUTO_LOCATION" xml:space="preserve"><value>Automatic IP detection (Recommended)</value></data>
+  <data name="APP_LABEL_DETECTED_IP_PREFIX" xml:space="preserve"><value>Current detected IP location: </value></data>
+  <data name="APP_RADIO_MANUAL_LOCATION" xml:space="preserve"><value>Manual location by geographic coordinates:</value></data>
+  <data name="APP_LABEL_LATITUDE" xml:space="preserve"><value>Latitude:</value></data>
+  <data name="APP_LABEL_LONGITUDE" xml:space="preserve"><value>Longitude:</value></data>
+  <data name="APP_LABEL_CITY" xml:space="preserve"><value>City:</value></data>
+  <data name="APP_BTN_DETECT_IP" xml:space="preserve"><value>Detect location</value></data>
+  <data name="APP_BTN_SAVE_LOCATION" xml:space="preserve"><value>Save location</value></data>
+  <data name="APP_GROUP_WEATHER_DATA" xml:space="preserve"><value>Latest retrieved weather data (Open-Meteo)</value></data>
+  <data name="APP_LABEL_WEATHER_LOCATION" xml:space="preserve"><value>Location:</value></data>
+  <data name="APP_LABEL_WEATHER_CONDITION" xml:space="preserve"><value>Condition:</value></data>
+  <data name="APP_LABEL_WEATHER_TEMP" xml:space="preserve"><value>Temperature:</value></data>
+  <data name="APP_LABEL_WEATHER_WIND" xml:space="preserve"><value>Wind:</value></data>
+  <data name="APP_LABEL_WEATHER_HUMIDITY" xml:space="preserve"><value>Humidity:</value></data>
+  <data name="APP_LABEL_WEATHER_CLOUDS" xml:space="preserve"><value>Cloud cover:</value></data>
+  <data name="APP_LABEL_WEATHER_PRECIP" xml:space="preserve"><value>Precipitation:</value></data>
+  <data name="APP_LABEL_WEATHER_VISIBILITY" xml:space="preserve"><value>Visibility:</value></data>
+  <data name="APP_BTN_REFRESH_WEATHER" xml:space="preserve"><value>Refresh weather</value></data>
+  <data name="APP_TAB_HISTORY" xml:space="preserve"><value>Wallpaper history</value></data>
+  <data name="APP_GROUP_HISTORY_LIST" xml:space="preserve"><value>Generated Wallpapers</value></data>
+  <data name="APP_GROUP_HISTORY_DETAILS" xml:space="preserve"><value>Wallpaper details &amp; preview</value></data>
+  <data name="APP_HINT_HISTORY_EMPTY" xml:space="preserve"><value>Select a wallpaper from the history</value></data>
+  <data name="APP_BTN_HISTORY_APPLY" xml:space="preserve"><value>Set as wallpaper</value></data>
+  <data name="APP_BTN_HISTORY_PIN" xml:space="preserve"><value>Pin / Unpin</value></data>
+  <data name="APP_BTN_HISTORY_VIEW_FILE" xml:space="preserve"><value>Open file</value></data>
+  <data name="APP_BTN_HISTORY_DELETE" xml:space="preserve"><value>Delete</value></data>
+
+  <!-- 2. MainViewModel.cs -->
+  <data name="VM_STATUS_DEFAULT" xml:space="preserve"><value>Ready.</value></data>
+  <data name="VM_LOCATION_DEFAULT" xml:space="preserve"><value>Not checked yet.</value></data>
+  <data name="VM_SCHEDULE_SUMMARY_PAUSED" xml:space="preserve"><value>Scheduling disabled (Paused)</value></data>
+  <data name="VM_SCHEDULE_SUMMARY_STARTUP_NOTE" xml:space="preserve"><value> · Checks on system startup</value></data>
+  <data name="VM_SCHEDULE_SUMMARY_INTERVAL_FORMAT" xml:space="preserve"><value>Active: every {0} h{1}</value></data>
+  <data name="VM_SCHEDULE_SUMMARY_DAILY_FORMAT" xml:space="preserve"><value>Active: every day at {0:D2}:{1:D2}{2}</value></data>
+  <data name="VM_LAST_GEN_NEVER" xml:space="preserve"><value>Never generated yet</value></data>
+  <data name="VM_AGO_DAYS_FORMAT" xml:space="preserve"><value>{0} day(s) ago</value></data>
+  <data name="VM_AGO_HOURS_FORMAT" xml:space="preserve"><value>{0} hour(s) ago</value></data>
+  <data name="VM_AGO_MINS_FORMAT" xml:space="preserve"><value>{0} min ago</value></data>
+  <data name="VM_WEATHER_NO_DATA" xml:space="preserve"><value>No saved weather data</value></data>
+  <data name="VM_WEATHER_TEMP_FORMAT" xml:space="preserve"><value>{0:F1} °C (Feels like: {1:F1} °C)</value></data>
+  <data name="VM_STATUS_INIT_LOADING" xml:space="preserve"><value>Loading settings and history...</value></data>
+  <data name="VM_STATUS_INIT_EXPIRED_GEN" xml:space="preserve"><value>Wallpaper expired. Generating new wallpaper in background...</value></data>
+  <data name="VM_STATUS_INIT_ERROR" xml:space="preserve"><value>Initialization error: {0}</value></data>
+  <data name="VM_STATUS_SAVE_PROGRESS" xml:space="preserve"><value>Saving settings...</value></data>
+  <data name="VM_STATUS_AUTOSAVING" xml:space="preserve"><value>Saving changes...</value></data>
+  <data name="VM_STATUS_AUTOSAVED" xml:space="preserve"><value>Changes saved ✓</value></data>
+  <data name="VM_STATUS_SAVE_SUCCESS_TASK" xml:space="preserve"><value>Settings saved and scheduled task updated in Windows.</value></data>
+  <data name="VM_STATUS_SAVE_SUCCESS_UNREGISTERED" xml:space="preserve"><value>Settings saved and automatic schedule disabled.</value></data>
+  <data name="VM_STATUS_SAVE_SUCCESS" xml:space="preserve"><value>Settings saved.</value></data>
+  <data name="VM_STATUS_SAVE_ERROR" xml:space="preserve"><value>Error saving settings: {0}</value></data>
+  <data name="VM_STATUS_DETECT_IP_PROGRESS" xml:space="preserve"><value>Detecting location by IP...</value></data>
+  <data name="VM_STATUS_DETECT_IP_SUCCESS" xml:space="preserve"><value>Location detected: {0}, {1}.</value></data>
+  <data name="VM_STATUS_DETECT_IP_ERROR" xml:space="preserve"><value>Error detecting location: {0}</value></data>
+  <data name="VM_STATUS_WEATHER_PROGRESS" xml:space="preserve"><value>Querying Open-Meteo weather API...</value></data>
+  <data name="VM_STATUS_WEATHER_SUCCESS" xml:space="preserve"><value>Weather data updated: {0}, {1:F1}°C in {2}.</value></data>
+  <data name="VM_STATUS_WEATHER_ERROR" xml:space="preserve"><value>Error querying weather: {0}</value></data>
+  <data name="VM_STATUS_GEN_PROGRESS" xml:space="preserve"><value>Generating procedural wallpaper and applying...</value></data>
+  <data name="VM_STATUS_GEN_SUCCESS" xml:space="preserve"><value>Wallpaper successfully generated and applied!</value></data>
+  <data name="VM_STATUS_GEN_INCOMPLETE" xml:space="preserve"><value>Generation did not complete.</value></data>
+  <data name="VM_STATUS_GEN_ERROR" xml:space="preserve"><value>Error generating wallpaper: {0}</value></data>
+  <data name="VM_STATUS_APPLY_NOT_FOUND" xml:space="preserve"><value>The image file does not exist on disk.</value></data>
+  <data name="VM_STATUS_APPLY_SUCCESS" xml:space="preserve"><value>Wallpaper applied: {0}.</value></data>
+  <data name="VM_STATUS_APPLY_ERROR" xml:space="preserve"><value>Error applying wallpaper: {0}</value></data>
+  <data name="VM_STATUS_PIN_PINNED" xml:space="preserve"><value>Wallpaper pinned in history.</value></data>
+  <data name="VM_STATUS_PIN_UNPINNED" xml:space="preserve"><value>Wallpaper unpinned.</value></data>
+  <data name="VM_STATUS_PIN_ERROR" xml:space="preserve"><value>Error pinning wallpaper: {0}</value></data>
+  <data name="VM_STATUS_DELETE_PINNED_BLOCKED" xml:space="preserve"><value>Cannot delete a pinned wallpaper. Unpin it first.</value></data>
+  <data name="VM_STATUS_DELETE_SUCCESS" xml:space="preserve"><value>Wallpaper deleted from history.</value></data>
+  <data name="VM_STATUS_DELETE_ERROR" xml:space="preserve"><value>Error deleting wallpaper: {0}</value></data>
+
+  <!-- 3. TrayIconService.cs -->
+  <data name="TRAY_TOOLTIP" xml:space="preserve"><value>Today Wallpaper</value></data>
+  <data name="TRAY_MENU_HEADER" xml:space="preserve"><value>Today Wallpaper</value></data>
+  <data name="TRAY_MENU_OPEN_APP" xml:space="preserve"><value>Open TodayWallpaper</value></data>
+  <data name="TRAY_MENU_UPDATE_NOW" xml:space="preserve"><value>Update wallpaper now</value></data>
+  <data name="TRAY_MENU_PAUSE_RESUME" xml:space="preserve"><value>Pause / Resume</value></data>
+  <data name="TRAY_MENU_RESTORE_BG" xml:space="preserve"><value>Restore my wallpaper...</value></data>
+  <data name="TRAY_MENU_EXIT" xml:space="preserve"><value>Exit</value></data>
+  <data name="TRAY_BALLOON_TITLE" xml:space="preserve"><value>Today Wallpaper</value></data>
+  <data name="TRAY_BALLOON_GENERATING" xml:space="preserve"><value>Generating new wallpaper...</value></data>
+  <data name="TRAY_BALLOON_UPDATE_SUCCESS" xml:space="preserve"><value>Wallpaper updated successfully!</value></data>
+  <data name="TRAY_BALLOON_UPDATE_ERROR" xml:space="preserve"><value>Error updating: {0}</value></data>
+  <data name="TRAY_STATE_RESUMED" xml:space="preserve"><value>Resumed</value></data>
+  <data name="TRAY_STATE_PAUSED" xml:space="preserve"><value>Paused</value></data>
+  <data name="TRAY_BALLOON_STATE_CHANGE" xml:space="preserve"><value>Automatic generation {0}.</value></data>
+  <data name="TRAY_DIALOG_RESTORE_TITLE" xml:space="preserve"><value>Select a wallpaper image</value></data>
+  <data name="TRAY_DIALOG_RESTORE_FILTER" xml:space="preserve"><value>Images|*.jpg;*.jpeg;*.png;*.bmp|All files|*.*</value></data>
+  <data name="TRAY_MSGBOX_ERROR_TITLE" xml:space="preserve"><value>Error</value></data>
+  <data name="TRAY_MSGBOX_ERROR_MSG" xml:space="preserve"><value>Could not apply wallpaper:&#xA;{0}</value></data>
+
+  <!-- 4. SettingsWindow.xaml -->
+  <data name="SETTINGS_WINDOW_TITLE" xml:space="preserve"><value>Today Wallpaper — Settings</value></data>
+  <data name="SETTINGS_GROUP_HEADER" xml:space="preserve"><value>General Settings</value></data>
+  <data name="SETTINGS_LABEL_INTERVAL" xml:space="preserve"><value>Refresh interval (hours):</value></data>
+  <data name="SETTINGS_LABEL_PALETTE" xml:space="preserve"><value>Palette mode:</value></data>
+  <data name="SETTINGS_LABEL_GENERATOR" xml:space="preserve"><value>Generator style:</value></data>
+  <data name="SETTINGS_LABEL_HISTORY_MAX" xml:space="preserve"><value>Max history items:</value></data>
+  <data name="SETTINGS_LABEL_ENABLED" xml:space="preserve"><value>Enabled:</value></data>
+  <data name="SETTINGS_BTN_SAVE" xml:space="preserve"><value>Save</value></data>
+
+  <!-- 5. Sandbox -->
+  <data name="SANDBOX_WINDOW_TITLE" xml:space="preserve"><value>TodayWallpaper — Generator Sandbox</value></data>
+  <data name="SANDBOX_GROUP_GENERATOR" xml:space="preserve"><value>Generator Configuration</value></data>
+  <data name="SANDBOX_LABEL_CONDITION" xml:space="preserve"><value>Condition:</value></data>
+  <data name="SANDBOX_LABEL_STYLE" xml:space="preserve"><value>Style:</value></data>
+  <data name="SANDBOX_LABEL_PALETTE" xml:space="preserve"><value>Palette:</value></data>
+  <data name="SANDBOX_GROUP_WEATHER" xml:space="preserve"><value>Weather Parameters</value></data>
+  <data name="SANDBOX_LABEL_WMO" xml:space="preserve"><value>WMO Code (0-99):</value></data>
+  <data name="SANDBOX_LABEL_TEMP" xml:space="preserve"><value>Temperature (°C):</value></data>
+  <data name="SANDBOX_LABEL_APPARENT_TEMP" xml:space="preserve"><value>Apparent temperature (°C):</value></data>
+  <data name="SANDBOX_LABEL_WIND" xml:space="preserve"><value>Wind (km/h):</value></data>
+  <data name="SANDBOX_LABEL_HUMIDITY" xml:space="preserve"><value>Humidity (%):</value></data>
+  <data name="SANDBOX_LABEL_PRECIP" xml:space="preserve"><value>Precipitation (mm):</value></data>
+  <data name="SANDBOX_LABEL_CLOUDS" xml:space="preserve"><value>Cloud cover (%):</value></data>
+  <data name="SANDBOX_LABEL_VISIBILITY" xml:space="preserve"><value>Visibility (km):</value></data>
+  <data name="SANDBOX_LABEL_DEWPOINT" xml:space="preserve"><value>Dew point (°C):</value></data>
+  <data name="SANDBOX_GROUP_ACTIONS" xml:space="preserve"><value>Actions</value></data>
+  <data name="SANDBOX_CHECK_AUTO_REFRESH" xml:space="preserve"><value>Auto-refresh on modify</value></data>
+  <data name="SANDBOX_BTN_RANDOMIZE" xml:space="preserve"><value>Randomize</value></data>
+  <data name="SANDBOX_BTN_GENERATE" xml:space="preserve"><value>Generate</value></data>
+  <data name="SANDBOX_LABEL_SEED_PREFIX" xml:space="preserve"><value>Computed seed: </value></data>
+  <data name="SANDBOX_OVERLAY_GENERATING" xml:space="preserve"><value>Generating preview...</value></data>
+  <data name="SANDBOX_HINT_EMPTY" xml:space="preserve"><value>Click 'Generate' to create a preview</value></data>
+  <data name="SANDBOX_STATUS_GEN_TIME_PREFIX" xml:space="preserve"><value>Generation time: </value></data>
+  <data name="SANDBOX_STATUS_GEN_TIME_SUFFIX" xml:space="preserve"><value> ms</value></data>
+  <data name="SANDBOX_BTN_SAVE_AS" xml:space="preserve"><value>Save as...</value></data>
+  <data name="SANDBOX_BTN_APPLY" xml:space="preserve"><value>Apply to desktop</value></data>
+  <data name="SANDBOX_DIALOG_SAVE_TITLE" xml:space="preserve"><value>Save wallpaper</value></data>
+  <data name="SANDBOX_DIALOG_SAVE_FILTER" xml:space="preserve"><value>JPEG|*.jpg|PNG|*.png</value></data>
+
+  <!-- 6. TaskScheduler -->
+  <data name="CORE_TASK_DESCRIPTION" xml:space="preserve"><value>Regenerates the desktop wallpaper based on current weather.</value></data>
+
+  <!-- 7. Generator Styles -->
+  <data name="GENERATOR_STYLE_BLUR_BLOBS" xml:space="preserve"><value>Blur Blobs</value></data>
+  <data name="GENERATOR_STYLE_LOW_POLY" xml:space="preserve"><value>Low Poly</value></data>
+  <data name="GENERATOR_STYLE_PERLIN_FLOW" xml:space="preserve"><value>Perlin Flow</value></data>
+  <data name="GENERATOR_STYLE_RADIAL_GRADIENT" xml:space="preserve"><value>Radial Gradient</value></data>
+  <data name="GENERATOR_STYLE_GEOMETRIC_SHAPES" xml:space="preserve"><value>Geometric Shapes</value></data>
+
+  <!-- 8. Palette Configuration -->
+  <data name="APP_TAB_PALETTES" xml:space="preserve"><value>Color Palettes</value></data>
+  <data name="APP_GROUP_PALETTE_CONFIG" xml:space="preserve"><value>Weather Palette Customization</value></data>
+  <data name="APP_PALETTE_DESCRIPTION" xml:space="preserve"><value>Customize primary and secondary colors per weather condition. You can maintain multiple palettes; enabled ones will be chosen randomly during generation.</value></data>
+  <data name="APP_LABEL_EDIT_MODE" xml:space="preserve"><value>Palette mode:</value></data>
+  <data name="APP_LABEL_SELECT_CONDITION" xml:space="preserve"><value>Weather condition:</value></data>
+  <data name="APP_LABEL_PALETTE_SELECT" xml:space="preserve"><value>Palette:</value></data>
+  <data name="APP_LABEL_PALETTE_NAME" xml:space="preserve"><value>Palette name:</value></data>
+  <data name="APP_CHECK_PALETTE_ENABLED" xml:space="preserve"><value>Enabled for random generation</value></data>
+  <data name="APP_BTN_NEW_PALETTE" xml:space="preserve"><value>+ New Palette</value></data>
+  <data name="APP_BTN_DUPLICATE_PALETTE" xml:space="preserve"><value>Duplicate</value></data>
+  <data name="APP_BTN_DELETE_PALETTE" xml:space="preserve"><value>Delete Palette</value></data>
+  <data name="APP_HINT_DRAG_DROP" xml:space="preserve"><value>Drag colors to move between Primary and Secondary or reorder</value></data>
+  <data name="APP_GROUP_PRIMARY_COLORS" xml:space="preserve"><value>Primary Colors (Dominant Background Tones)</value></data>
+  <data name="APP_GROUP_SECONDARY_COLORS" xml:space="preserve"><value>Secondary Colors (Accent / Highlights)</value></data>
+  <data name="APP_GROUP_PALETTE_PREVIEW" xml:space="preserve"><value>Palette Preview</value></data>
+  <data name="APP_BTN_ADD_COLOR" xml:space="preserve"><value>+ Add Color</value></data>
+  <data name="APP_BTN_REMOVE_COLOR" xml:space="preserve"><value>Remove</value></data>
+  <data name="APP_BTN_PICK_COLOR" xml:space="preserve"><value>Pick...</value></data>
+  <data name="APP_BTN_SAVE_PALETTES" xml:space="preserve"><value>Save Palettes</value></data>
+  <data name="APP_BTN_RESET_CONDITION" xml:space="preserve"><value>Reset Condition</value></data>
+  <data name="APP_BTN_RESET_ALL_PALETTES" xml:space="preserve"><value>Reset All Palettes</value></data>
+  <data name="APP_PALETTE_SAVED_MSG" xml:space="preserve"><value>Palettes saved successfully.</value></data>
+  <data name="APP_PALETTE_RESET_MSG" xml:space="preserve"><value>Palettes reset to built-in defaults.</value></data>
+  <data name="APP_PALETTE_INVALID_WARNING" xml:space="preserve"><value>Some colors have invalid hex format.</value></data>
+  <data name="APP_PALETTE_LUMINANCE_RECOMMENDATION" xml:space="preserve"><value>Note: Recommended lightness is 20%–55% for optimal icon contrast.</value></data>
+  <data name="APP_STATUS_PALETTE_ADDED" xml:space="preserve"><value>New palette created.</value></data>
+  <data name="APP_STATUS_PALETTE_DUPLICATED" xml:space="preserve"><value>Palette duplicated.</value></data>
+  <data name="APP_STATUS_PALETTE_DELETED" xml:space="preserve"><value>Palette deleted.</value></data>
+  <data name="WEATHER_COND_SUNNY" xml:space="preserve"><value>Sunny</value></data>
+  <data name="WEATHER_COND_CLOUDY" xml:space="preserve"><value>Cloudy</value></data>
+  <data name="WEATHER_COND_RAINY" xml:space="preserve"><value>Rainy</value></data>
+  <data name="WEATHER_COND_STORMY" xml:space="preserve"><value>Stormy</value></data>
+  <data name="WEATHER_COND_SNOWY" xml:space="preserve"><value>Snowy</value></data>
+  <data name="WEATHER_COND_FOGGY" xml:space="preserve"><value>Foggy</value></data>
+  <data name="PALETTE_MODE_EMPATHIC" xml:space="preserve"><value>Empathic (Harmonious with weather)</value></data>
+  <data name="PALETTE_MODE_CONTRAST" xml:space="preserve"><value>Contrast (Mood-lifting opposites)</value></data>
+</root>

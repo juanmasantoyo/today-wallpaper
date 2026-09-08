@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="TodayWallpaper.App/TodayWallpaper.App.csproj" />
+  <Project Path="TodayWallpaper.Core/TodayWallpaper.Core.csproj" />
+  <Project Path="TodayWallpaper.Sandbox/TodayWallpaper.Sandbox.csproj" />
+  <Project Path="TodayWallpaper.Tests/TodayWallpaper.Tests.csproj" />
+  <Project Path="TodayWallpaper.Worker/TodayWallpaper.Worker.csproj" />
+</Solution>

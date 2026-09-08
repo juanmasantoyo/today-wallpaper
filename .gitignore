@@ -1,0 +1,24 @@
+## .NET
+bin/
+obj/
+.dotnet/
+.dotnet_home/
+*.user
+*.suo
+.vs/
+*.sln.DotSettings.user
+
+## Coverage
+coverage/
+
+## MSIX build output
+AppPackages/
+_pkginfo.txt
+
+## User-specific settings
+*.rsuser
+.idea/
+
+## OS
+Thumbs.db
+.DS_Store

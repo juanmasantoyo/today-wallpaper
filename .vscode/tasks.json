@@ -1,0 +1,110 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "env": {
+      "DOTNET_CLI_HOME": "${workspaceFolder}/.dotnet_home"
+    }
+  },
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/TodayWallpaper.slnx",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary;ForceConsoleColor"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "publish-app-release",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "publish",
+        "${workspaceFolder}/TodayWallpaper.App/TodayWallpaper.App.csproj",
+        "-c",
+        "Release",
+        "-r",
+        "win-x64",
+        "--self-contained",
+        "true",
+        "-p:PublishSingleFile=true",
+        "-o",
+        "${workspaceFolder}/publish"
+      ],
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "publish-worker-release",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "publish",
+        "${workspaceFolder}/TodayWallpaper.Worker/TodayWallpaper.Worker.csproj",
+        "-c",
+        "Release",
+        "-r",
+        "win-x64",
+        "--self-contained",
+        "true",
+        "-p:PublishSingleFile=true",
+        "-o",
+        "${workspaceFolder}/publish"
+      ],
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "publish-release",
+      "dependsOn": [
+        "publish-app-release",
+        "publish-worker-release"
+      ],
+      "dependsOrder": "sequence",
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "detail": "Publica TodayWallpaper.App y TodayWallpaper.Worker en modo Release autocontenido en la carpeta ./publish"
+    },
+    {
+      "label": "publish-install-local",
+      "type": "shell",
+      "command": "dotnet publish TodayWallpaper.App/TodayWallpaper.App.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o \"$env:LOCALAPPDATA/Programs/TodayWallpaper\"; dotnet publish TodayWallpaper.Worker/TodayWallpaper.Worker.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o \"$env:LOCALAPPDATA/Programs/TodayWallpaper\"",
+      "problemMatcher": "$msCompile",
+      "group": "none",
+      "detail": "Publica e instala directamente TodayWallpaper.App y TodayWallpaper.Worker en %LOCALAPPDATA%/Programs/TodayWallpaper"
+    },
+    {
+      "label": "test",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "test",
+        "${workspaceFolder}/TodayWallpaper.slnx",
+        "--logger",
+        "console;verbosity=normal"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    }
+  ]
+}

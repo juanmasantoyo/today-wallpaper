@@ -1,0 +1,60 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "TodayWallpaper.App (Debug)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/TodayWallpaper.App/bin/Debug/net10.0-windows/TodayWallpaper.App.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/TodayWallpaper.App",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "TodayWallpaper.Worker (Debug)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/TodayWallpaper.Worker/bin/Debug/net10.0-windows/TodayWallpaper.Worker.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/TodayWallpaper.Worker",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "TodayWallpaper.Sandbox (Debug)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/TodayWallpaper.Sandbox/bin/Debug/net10.0-windows/TodayWallpaper.Sandbox.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/TodayWallpaper.Sandbox",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Ejecutar App Publicada (Release)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "publish-release",
+      "program": "${workspaceFolder}/publish/TodayWallpaper.App.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/publish",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Ejecutar Worker Publicado (Release)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "publish-release",
+      "program": "${workspaceFolder}/publish/TodayWallpaper.Worker.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}/publish",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    }
+  ]
+}
