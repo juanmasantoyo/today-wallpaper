@@ -20,7 +20,7 @@ public class SettingsStoreTests
 
         Assert.NotNull(settings);
         Assert.True(settings.IsEnabled);
-        Assert.Equal(5, settings.SelectedGeneratorStyles.Count);
+        Assert.Equal(6, settings.SelectedGeneratorStyles.Count);
         Assert.Equal(PaletteMode.Empathic, settings.PaletteMode);
         Assert.Equal(50, settings.HistoryMaxCount);
     }
@@ -36,7 +36,7 @@ public class SettingsStoreTests
             var settings = await store.LoadAsync();
             Assert.NotNull(settings);
             Assert.True(settings.IsEnabled);
-            Assert.Equal(5, settings.SelectedGeneratorStyles.Count);
+            Assert.Equal(6, settings.SelectedGeneratorStyles.Count);
         }
         finally
         {
@@ -56,7 +56,7 @@ public class SettingsStoreTests
             var customSettings = new AppSettings
             {
                 IsEnabled = false,
-                SelectedGeneratorStyles = new[] { "LowPoly", "PerlinFlow" },
+                SelectedGeneratorStyles = new[] { "LowPoly", "AuroraWaves" },
                 PaletteMode = PaletteMode.Contrast,
                 HistoryMaxCount = 24,
                 Location = new LocationSettings(35.6762, 139.6503, "Tokyo")
@@ -69,7 +69,7 @@ public class SettingsStoreTests
             Assert.False(loaded.IsEnabled);
             Assert.Equal(2, loaded.SelectedGeneratorStyles.Count);
             Assert.Contains("LowPoly", loaded.SelectedGeneratorStyles);
-            Assert.Contains("PerlinFlow", loaded.SelectedGeneratorStyles);
+            Assert.Contains("AuroraWaves", loaded.SelectedGeneratorStyles);
             Assert.Equal(PaletteMode.Contrast, loaded.PaletteMode);
             Assert.Equal(24, loaded.HistoryMaxCount);
             Assert.NotNull(loaded.Location);

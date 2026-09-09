@@ -41,7 +41,7 @@ public class WallpaperSetterAndScreenTests
     public void WallpaperSetter_CurrentWallpaperPath_IsDefined()
     {
         Assert.False(string.IsNullOrWhiteSpace(WallpaperSetter.CurrentWallpaperPath));
-        Assert.EndsWith(".jpg", WallpaperSetter.CurrentWallpaperPath, StringComparison.OrdinalIgnoreCase);
+        Assert.EndsWith(".png", WallpaperSetter.CurrentWallpaperPath, StringComparison.OrdinalIgnoreCase);
     }
 
     private readonly Xunit.Abstractions.ITestOutputHelper _output;

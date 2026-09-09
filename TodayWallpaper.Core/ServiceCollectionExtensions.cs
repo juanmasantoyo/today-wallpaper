@@ -31,12 +31,13 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IPaletteConfigLoader, PaletteConfigLoader>();
         services.AddTransient<IPaletteMapper, PaletteMapper>();
 
-        // Generators — all five styles registered as IWallpaperGenerator.
+        // Generators — all six styles registered as IWallpaperGenerator.
         services.AddTransient<IWallpaperGenerator, BlurBlobsGenerator>();
         services.AddTransient<IWallpaperGenerator, LowPolyGenerator>();
-        services.AddTransient<IWallpaperGenerator, PerlinFlowGenerator>();
         services.AddTransient<IWallpaperGenerator, RadialGradientGenerator>();
-        services.AddTransient<IWallpaperGenerator, GeometricShapesGenerator>();
+        services.AddTransient<IWallpaperGenerator, AuroraWavesGenerator>();
+        services.AddTransient<IWallpaperGenerator, VoronoiMosaicGenerator>();
+        services.AddTransient<IWallpaperGenerator, AtmosphericRidgesGenerator>();
         services.AddTransient<WallpaperGeneratorFactory>();
 
         // Wallpaper.

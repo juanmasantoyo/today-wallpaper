@@ -21,4 +21,10 @@ public partial class SettingsWindow : Window
         DialogResult = true;
         Close();
     }
+
+    private void CancelClick(object sender, RoutedEventArgs e)
+    {
+        DialogResult = false;
+        Close();
+    }
 }

@@ -3,191 +3,211 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:TodayWallpaper.Core.Localization;assembly=TodayWallpaper.Core"
         Title="{x:Static loc:Strings.SANDBOX_WINDOW_TITLE}"
-        Width="1100" Height="720"
-        MinWidth="850" MinHeight="550"
-        FontFamily="Segoe UI" FontSize="12"
+        Width="1140" Height="740"
+        MinWidth="880" MinHeight="580"
+        FontFamily="Segoe UI" FontSize="13"
+        Background="{DynamicResource WindowBackgroundBrush}"
         WindowStartupLocation="CenterScreen">
 
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-
-
-        <!-- Value Label Style for Slider Readouts -->
-        <Style x:Key="ValueLabel" TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="MinWidth" Value="42"/>
-            <Setter Property="TextAlignment" Value="Right"/>
-            <Setter Property="Margin" Value="4,0,0,0"/>
-        </Style>
-    </Window.Resources>
-
-    <Grid Margin="8">
+    <Grid Margin="16">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320" MinWidth="260"/>
+            <ColumnDefinition Width="340" MinWidth="280"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- ══ LEFT PANEL: Controls ══ -->
-        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,8,0">
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,14,0" Padding="0,0,4,0">
             <StackPanel>
-                <!-- Generation Settings Group -->
-                <GroupBox Header="{x:Static loc:Strings.SANDBOX_GROUP_GENERATOR}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="28"/>
-                            <RowDefinition Height="28"/>
-                            <RowDefinition Height="28"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Row="0" Grid.Column="0" Content="{x:Static loc:Strings.SANDBOX_LABEL_CONDITION}"/>
-                        <ComboBox Grid.Row="0" Grid.Column="1"
-                                  ItemsSource="{Binding Conditions}"
-                                  SelectedItem="{Binding Condition}"
-                                  VerticalAlignment="Center"/>
-
-                        <Label Grid.Row="1" Grid.Column="0" Content="{x:Static loc:Strings.SANDBOX_LABEL_STYLE}"/>
-                        <ComboBox Grid.Row="1" Grid.Column="1"
-                                  ItemsSource="{Binding Styles}"
-                                  SelectedValue="{Binding StyleId}"
-                                  SelectedValuePath="StyleId"
-                                  DisplayMemberPath="DisplayName"
-                                  VerticalAlignment="Center"/>
-
-                        <Label Grid.Row="2" Grid.Column="0" Content="{x:Static loc:Strings.SANDBOX_LABEL_PALETTE}"/>
-                        <ComboBox Grid.Row="2" Grid.Column="1"
-                                  ItemsSource="{Binding Modes}"
-                                  SelectedItem="{Binding Mode}"
-                                  VerticalAlignment="Center"/>
-                    </Grid>
-                </GroupBox>
-
-                <!-- Weather Sliders Group -->
-                <GroupBox Header="{x:Static loc:Strings.SANDBOX_GROUP_WEATHER}">
+                <!-- Generation Settings Card -->
+                <Border Style="{StaticResource FluentCard}">
                     <StackPanel>
+                        <TextBlock Text="{x:Static loc:Strings.SANDBOX_GROUP_GENERATOR}"
+                                   Style="{StaticResource FluentSectionHeader}"/>
+
+                        <Grid Margin="0,4,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Content="{x:Static loc:Strings.SANDBOX_LABEL_CONDITION}"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1"
+                                      Style="{StaticResource FluentComboBox}"
+                                      ItemsSource="{Binding Conditions}"
+                                      SelectedItem="{Binding Condition}"
+                                      Margin="0,0,0,8"/>
+
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Content="{x:Static loc:Strings.SANDBOX_LABEL_STYLE}"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1"
+                                      Style="{StaticResource FluentComboBox}"
+                                      ItemsSource="{Binding Styles}"
+                                      SelectedValue="{Binding StyleId}"
+                                      SelectedValuePath="StyleId"
+                                      DisplayMemberPath="DisplayName"
+                                      Margin="0,0,0,8"/>
+
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Content="{x:Static loc:Strings.SANDBOX_LABEL_PALETTE}"
+                                   VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="2" Grid.Column="1"
+                                      Style="{StaticResource FluentComboBox}"
+                                      ItemsSource="{Binding Modes}"
+                                      SelectedItem="{Binding Mode}"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Weather Sliders Card -->
+                <Border Style="{StaticResource FluentCard}">
+                    <StackPanel>
+                        <TextBlock Text="{x:Static loc:Strings.SANDBOX_GROUP_WEATHER}"
+                                   Style="{StaticResource FluentSectionHeader}"/>
+
                         <!-- WMO Code -->
-                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_WMO}"/>
-                        <Grid Margin="0,0,0,4">
+                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_WMO}" FontWeight="SemiBold" Margin="0,4,0,0"/>
+                        <Grid Margin="0,0,0,6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Slider Grid.Column="0" Minimum="0" Maximum="99" Value="{Binding WmoCode}"
-                                    TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                    TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="1" Text="{Binding WmoCode}" Style="{StaticResource ValueLabel}"/>
                         </Grid>
 
                         <!-- Temperature -->
-                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_TEMP}"/>
-                        <Grid Margin="0,0,0,4">
+                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_TEMP}" FontWeight="SemiBold"/>
+                        <Grid Margin="0,0,0,6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Slider Grid.Column="0" Minimum="-30" Maximum="50" Value="{Binding Temperature}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Temperature, StringFormat={}{0:F1}}" Style="{StaticResource ValueLabel}"/>
+                            <Slider Grid.Column="0" Minimum="-30" Maximum="50" Value="{Binding Temperature}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Temperature, StringFormat={}{0:F1}°C}" Style="{StaticResource ValueLabel}"/>
                         </Grid>
 
                         <!-- Apparent Temperature -->
-                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_APPARENT_TEMP}"/>
-                        <Grid Margin="0,0,0,4">
+                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_APPARENT_TEMP}" FontWeight="SemiBold"/>
+                        <Grid Margin="0,0,0,6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Slider Grid.Column="0" Minimum="-30" Maximum="50" Value="{Binding ApparentTemp}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding ApparentTemp, StringFormat={}{0:F1}}" Style="{StaticResource ValueLabel}"/>
+                            <Slider Grid.Column="0" Minimum="-30" Maximum="50" Value="{Binding ApparentTemp}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding ApparentTemp, StringFormat={}{0:F1}°C}" Style="{StaticResource ValueLabel}"/>
                         </Grid>
 
                         <!-- Windspeed -->
-                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_WIND}"/>
-                        <Grid Margin="0,0,0,4">
+                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_WIND}" FontWeight="SemiBold"/>
+                        <Grid Margin="0,0,0,6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Slider Grid.Column="0" Minimum="0" Maximum="150" Value="{Binding Windspeed}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Windspeed, StringFormat={}{0:F0}}" Style="{StaticResource ValueLabel}"/>
+                            <Slider Grid.Column="0" Minimum="0" Maximum="150" Value="{Binding Windspeed}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Windspeed, StringFormat={}{0:F0} km/h}" Style="{StaticResource ValueLabel}"/>
                         </Grid>
 
                         <!-- Humidity -->
-                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_HUMIDITY}"/>
-                        <Grid Margin="0,0,0,4">
+                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_HUMIDITY}" FontWeight="SemiBold"/>
+                        <Grid Margin="0,0,0,6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Slider Grid.Column="0" Minimum="0" Maximum="100" Value="{Binding Humidity}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Humidity, StringFormat={}{0:F0}}" Style="{StaticResource ValueLabel}"/>
+                            <Slider Grid.Column="0" Minimum="0" Maximum="100" Value="{Binding Humidity}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Humidity, StringFormat={}{0:F0}%}" Style="{StaticResource ValueLabel}"/>
                         </Grid>
 
                         <!-- Precipitation -->
-                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_PRECIP}"/>
-                        <Grid Margin="0,0,0,4">
+                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_PRECIP}" FontWeight="SemiBold"/>
+                        <Grid Margin="0,0,0,6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Slider Grid.Column="0" Minimum="0" Maximum="100" Value="{Binding Precipitation}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Precipitation, StringFormat={}{0:F1}}" Style="{StaticResource ValueLabel}"/>
+                            <Slider Grid.Column="0" Minimum="0" Maximum="100" Value="{Binding Precipitation}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Precipitation, StringFormat={}{0:F1} mm}" Style="{StaticResource ValueLabel}"/>
                         </Grid>
 
                         <!-- Cloud Cover -->
-                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_CLOUDS}"/>
-                        <Grid Margin="0,0,0,4">
+                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_CLOUDS}" FontWeight="SemiBold"/>
+                        <Grid Margin="0,0,0,6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Slider Grid.Column="0" Minimum="0" Maximum="100" Value="{Binding CloudCover}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding CloudCover, StringFormat={}{0:F0}}" Style="{StaticResource ValueLabel}"/>
+                            <Slider Grid.Column="0" Minimum="0" Maximum="100" Value="{Binding CloudCover}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding CloudCover, StringFormat={}{0:F0}%}" Style="{StaticResource ValueLabel}"/>
                         </Grid>
 
                         <!-- Visibility -->
-                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_VISIBILITY}"/>
-                        <Grid Margin="0,0,0,4">
+                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_VISIBILITY}" FontWeight="SemiBold"/>
+                        <Grid Margin="0,0,0,6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Slider Grid.Column="0" Minimum="0" Maximum="50" Value="{Binding Visibility}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Visibility, StringFormat={}{0:F1}}" Style="{StaticResource ValueLabel}"/>
+                            <Slider Grid.Column="0" Minimum="0" Maximum="50" Value="{Binding Visibility}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Visibility, StringFormat={}{0:F1} km}" Style="{StaticResource ValueLabel}"/>
                         </Grid>
 
                         <!-- Dewpoint -->
-                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_DEWPOINT}"/>
+                        <Label Content="{x:Static loc:Strings.SANDBOX_LABEL_DEWPOINT}" FontWeight="SemiBold"/>
                         <Grid Margin="0,0,0,4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Slider Grid.Column="0" Minimum="-30" Maximum="30" Value="{Binding Dewpoint}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Dewpoint, StringFormat={}{0:F1}}" Style="{StaticResource ValueLabel}"/>
+                            <Slider Grid.Column="0" Minimum="-30" Maximum="30" Value="{Binding Dewpoint}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Dewpoint, StringFormat={}{0:F1}°C}" Style="{StaticResource ValueLabel}"/>
                         </Grid>
                     </StackPanel>
-                </GroupBox>
+                </Border>
 
-                <!-- Actions Group -->
-                <GroupBox Header="{x:Static loc:Strings.SANDBOX_GROUP_ACTIONS}">
+                <!-- Actions Card -->
+                <Border Style="{StaticResource FluentCard}">
                     <StackPanel>
+                        <TextBlock Text="{x:Static loc:Strings.SANDBOX_GROUP_ACTIONS}"
+                                   Style="{StaticResource FluentSectionHeader}"/>
+
                         <CheckBox Content="{x:Static loc:Strings.SANDBOX_CHECK_AUTO_REFRESH}"
                                   IsChecked="{Binding AutoRefresh}"
-                                  Margin="0,0,0,8"/>
+                                  FontWeight="SemiBold"
+                                  Margin="0,4,0,10"/>
 
-                        <WrapPanel Margin="0,0,0,8">
-                            <Button Content="{x:Static loc:Strings.SANDBOX_BTN_RANDOMIZE}" Click="RandomizeClick" Margin="0,0,8,0"/>
-                            <Button Content="{x:Static loc:Strings.SANDBOX_BTN_GENERATE}" Click="GenerateClick"/>
+                        <WrapPanel Margin="0,0,0,10">
+                            <Button Content="{x:Static loc:Strings.SANDBOX_BTN_RANDOMIZE}"
+                                    Style="{StaticResource SecondaryButton}"
+                                    Click="RandomizeClick" Margin="0,0,8,0"/>
+                            <Button Content="{x:Static loc:Strings.SANDBOX_BTN_GENERATE}"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Click="GenerateClick"/>
                         </WrapPanel>
 
-                        <TextBlock TextWrapping="Wrap" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}">
-                            <Run Text="{x:Static loc:Strings.SANDBOX_LABEL_SEED_PREFIX}"/>
-                            <Run Text="{Binding Seed, Mode=OneWay}" FontWeight="SemiBold"/>
-                        </TextBlock>
+                        <Border Background="{DynamicResource CardHoverBackgroundBrush}"
+                                BorderBrush="{DynamicResource CardBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="8,6">
+                            <TextBlock TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}">
+                                <Run Text="{x:Static loc:Strings.SANDBOX_LABEL_SEED_PREFIX}"/>
+                                <Run Text="{Binding Seed, Mode=OneWay}" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                            </TextBlock>
+                        </Border>
                     </StackPanel>
-                </GroupBox>
+                </Border>
             </StackPanel>
         </ScrollViewer>
 
@@ -198,25 +218,29 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Preview Image Canvas -->
+            <!-- Preview Image Canvas Card -->
             <Border Grid.Row="0"
-                    BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                    BorderBrush="{DynamicResource CardBorderBrush}"
                     BorderThickness="1"
-                    Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}">
+                    CornerRadius="8"
+                    Background="#1A1A1A"
+                    ClipToBounds="True">
                 <Grid>
                     <Image Source="{Binding Preview}" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
 
                     <!-- Generating overlay -->
-                    <Border Background="#80000000" Visibility="{Binding IsGenerating, Converter={StaticResource BoolToVis}}">
-                        <TextBlock Text="{x:Static loc:Strings.SANDBOX_OVERLAY_GENERATING}"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   Foreground="White" FontSize="16" FontWeight="SemiBold"/>
+                    <Border Background="#88000000" Visibility="{Binding IsGenerating, Converter={StaticResource BoolToVis}}">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="⚙️" FontSize="28" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                            <TextBlock Text="{x:Static loc:Strings.SANDBOX_OVERLAY_GENERATING}"
+                                       Foreground="White" FontSize="16" FontWeight="SemiBold"/>
+                        </StackPanel>
                     </Border>
 
                     <!-- Empty state -->
                     <TextBlock Text="{x:Static loc:Strings.SANDBOX_HINT_EMPTY}"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Foreground="White" FontSize="14">
+                               Foreground="#88FFFFFF" FontSize="14">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -231,22 +255,36 @@
                 </Grid>
             </Border>
 
-            <!-- Native Status Bar -->
-            <StatusBar Grid.Row="1" Margin="0,4,0,0">
-                <StatusBarItem>
-                    <TextBlock VerticalAlignment="Center">
+            <!-- Status Bar -->
+            <Border Grid.Row="1"
+                    Background="{DynamicResource CardBackgroundBrush}"
+                    BorderBrush="{DynamicResource CardBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="6"
+                    Padding="12,8"
+                    Margin="0,10,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center">
                         <Run Text="{x:Static loc:Strings.SANDBOX_STATUS_GEN_TIME_PREFIX}"/>
                         <Run Text="{Binding GenerationMs, Mode=OneWay}" FontWeight="SemiBold"/>
                         <Run Text="{x:Static loc:Strings.SANDBOX_STATUS_GEN_TIME_SUFFIX}"/>
                     </TextBlock>
-                </StatusBarItem>
-                <StatusBarItem HorizontalAlignment="Right">
-                    <WrapPanel>
-                        <Button Content="{x:Static loc:Strings.SANDBOX_BTN_SAVE_AS}" Click="SaveAsClick" Margin="0,0,8,0"/>
-                        <Button Content="{x:Static loc:Strings.SANDBOX_BTN_APPLY}" Click="ApplyClick"/>
+
+                    <WrapPanel Grid.Column="1">
+                        <Button Content="{x:Static loc:Strings.SANDBOX_BTN_SAVE_AS}"
+                                Style="{StaticResource SecondaryButton}"
+                                Click="SaveAsClick" Margin="0,0,8,0"/>
+                        <Button Content="{x:Static loc:Strings.SANDBOX_BTN_APPLY}"
+                                Style="{StaticResource PrimaryButton}"
+                                Click="ApplyClick"/>
                     </WrapPanel>
-                </StatusBarItem>
-            </StatusBar>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Window>

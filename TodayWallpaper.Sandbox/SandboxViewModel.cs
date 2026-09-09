@@ -196,10 +196,12 @@ public sealed class SandboxViewModel : INotifyPropertyChanged
                 var palette   = _mapper.Map(weather.Condition, Mode, weather);
                 var generator = _factory.Resolve(StyleId, weather);
 
-                var tempPath = Path.Combine(Path.GetTempPath(), $"sandbox_{Guid.NewGuid():N}.jpg");
+                var tempPath = Path.Combine(Path.GetTempPath(), $"sandbox_{Guid.NewGuid():N}.png");
+                int width = Math.Max(1920, _screenResolution.GetWidth());
+                int height = Math.Max(1080, _screenResolution.GetHeight());
 
                 var sw = Stopwatch.StartNew();
-                await Task.Run(async () => await generator.GenerateAsync(palette, weather, 1280, 720, tempPath));
+                await Task.Run(async () => await generator.GenerateAsync(palette, weather, width, height, tempPath));
                 sw.Stop();
 
                 GenerationMs = sw.ElapsedMilliseconds;
@@ -230,8 +232,8 @@ public sealed class SandboxViewModel : INotifyPropertyChanged
         {
             Title            = TodayWallpaper.Core.Localization.Strings.SANDBOX_DIALOG_SAVE_TITLE,
             Filter           = TodayWallpaper.Core.Localization.Strings.SANDBOX_DIALOG_SAVE_FILTER,
-            FileName         = $"wallpaper_{Condition}_{StyleId}.jpg",
-            DefaultExt       = ".jpg"
+            FileName         = $"wallpaper_{Condition}_{StyleId}.png",
+            DefaultExt       = ".png"
         };
         if (dialog.ShowDialog() != true) return;
 

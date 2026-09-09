@@ -33,18 +33,20 @@ public class AllGeneratorsTests
     [Theory]
     [InlineData("BlurBlobs")]
     [InlineData("LowPoly")]
-    [InlineData("PerlinFlow")]
     [InlineData("RadialGradient")]
-    [InlineData("GeometricShapes")]
+    [InlineData("AuroraWaves")]
+    [InlineData("VoronoiMosaic")]
+    [InlineData("AtmosphericRidges")]
     public async Task Generator_ProducesValidImage(string styleId)
     {
         IWallpaperGenerator generator = styleId switch
         {
             "BlurBlobs" => new BlurBlobsGenerator(new Mock<ILogger<BlurBlobsGenerator>>().Object),
             "LowPoly" => new LowPolyGenerator(new Mock<ILogger<LowPolyGenerator>>().Object),
-            "PerlinFlow" => new PerlinFlowGenerator(new Mock<ILogger<PerlinFlowGenerator>>().Object),
             "RadialGradient" => new RadialGradientGenerator(new Mock<ILogger<RadialGradientGenerator>>().Object),
-            "GeometricShapes" => new GeometricShapesGenerator(new Mock<ILogger<GeometricShapesGenerator>>().Object),
+            "AuroraWaves" => new AuroraWavesGenerator(new Mock<ILogger<AuroraWavesGenerator>>().Object),
+            "VoronoiMosaic" => new VoronoiMosaicGenerator(new Mock<ILogger<VoronoiMosaicGenerator>>().Object),
+            "AtmosphericRidges" => new AtmosphericRidgesGenerator(new Mock<ILogger<AtmosphericRidgesGenerator>>().Object),
             _ => throw new ArgumentOutOfRangeException(nameof(styleId))
         };
 
@@ -122,15 +124,17 @@ public class AllGeneratorsTests
         var g1 = new BlurBlobsGenerator(new Mock<ILogger<BlurBlobsGenerator>>().Object);
         var g2 = new LowPolyGenerator(new Mock<ILogger<LowPolyGenerator>>().Object);
         var g3 = new RadialGradientGenerator(new Mock<ILogger<RadialGradientGenerator>>().Object);
+        var g4 = new AuroraWavesGenerator(new Mock<ILogger<AuroraWavesGenerator>>().Object);
 
         var factory = new WallpaperGeneratorFactory(
-            new IWallpaperGenerator[] { g1, g2, g3 },
+            new IWallpaperGenerator[] { g1, g2, g3, g4 },
             new Mock<ILogger<WallpaperGeneratorFactory>>().Object);
 
-        Assert.Equal(3, factory.StyleIds.Count);
+        Assert.Equal(4, factory.StyleIds.Count);
         Assert.Contains("BlurBlobs", factory.StyleIds);
         Assert.Contains("LowPoly", factory.StyleIds);
         Assert.Contains("RadialGradient", factory.StyleIds);
+        Assert.Contains("AuroraWaves", factory.StyleIds);
 
         // Exact match
         var resolved = factory.Resolve("LowPoly");
@@ -162,7 +166,7 @@ public class AllGeneratorsTests
     [Fact]
     public void GeneratorStyles_HaveLocalizedDisplayNames()
     {
-        var styleIds = new[] { "BlurBlobs", "LowPoly", "PerlinFlow", "RadialGradient", "GeometricShapes" };
+        var styleIds = new[] { "BlurBlobs", "LowPoly", "RadialGradient", "AuroraWaves", "VoronoiMosaic", "AtmosphericRidges" };
         foreach (var styleId in styleIds)
         {
             var localizedName = TodayWallpaper.Core.Localization.Strings.GetGeneratorStyleName(styleId);
@@ -174,18 +178,20 @@ public class AllGeneratorsTests
     [Theory]
     [InlineData("BlurBlobs")]
     [InlineData("LowPoly")]
-    [InlineData("PerlinFlow")]
     [InlineData("RadialGradient")]
-    [InlineData("GeometricShapes")]
+    [InlineData("AuroraWaves")]
+    [InlineData("VoronoiMosaic")]
+    [InlineData("AtmosphericRidges")]
     public async Task StormyWallpaper_HasHealthyLuminanceAndIsNotMuddyBlack(string styleId)
     {
         IWallpaperGenerator generator = styleId switch
         {
             "BlurBlobs" => new BlurBlobsGenerator(new Mock<ILogger<BlurBlobsGenerator>>().Object),
             "LowPoly" => new LowPolyGenerator(new Mock<ILogger<LowPolyGenerator>>().Object),
-            "PerlinFlow" => new PerlinFlowGenerator(new Mock<ILogger<PerlinFlowGenerator>>().Object),
             "RadialGradient" => new RadialGradientGenerator(new Mock<ILogger<RadialGradientGenerator>>().Object),
-            "GeometricShapes" => new GeometricShapesGenerator(new Mock<ILogger<GeometricShapesGenerator>>().Object),
+            "AuroraWaves" => new AuroraWavesGenerator(new Mock<ILogger<AuroraWavesGenerator>>().Object),
+            "VoronoiMosaic" => new VoronoiMosaicGenerator(new Mock<ILogger<VoronoiMosaicGenerator>>().Object),
+            "AtmosphericRidges" => new AtmosphericRidgesGenerator(new Mock<ILogger<AtmosphericRidgesGenerator>>().Object),
             _ => throw new ArgumentOutOfRangeException(nameof(styleId))
         };
 

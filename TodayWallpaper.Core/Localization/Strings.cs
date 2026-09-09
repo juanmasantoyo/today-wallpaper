@@ -209,9 +209,10 @@ public static class Strings
     // ── 7. Generator Styles ──────────────────────────────────────────────────
     public static string GENERATOR_STYLE_BLUR_BLOBS => Get(nameof(GENERATOR_STYLE_BLUR_BLOBS));
     public static string GENERATOR_STYLE_LOW_POLY => Get(nameof(GENERATOR_STYLE_LOW_POLY));
-    public static string GENERATOR_STYLE_PERLIN_FLOW => Get(nameof(GENERATOR_STYLE_PERLIN_FLOW));
     public static string GENERATOR_STYLE_RADIAL_GRADIENT => Get(nameof(GENERATOR_STYLE_RADIAL_GRADIENT));
-    public static string GENERATOR_STYLE_GEOMETRIC_SHAPES => Get(nameof(GENERATOR_STYLE_GEOMETRIC_SHAPES));
+    public static string GENERATOR_STYLE_AURORA_WAVES => Get(nameof(GENERATOR_STYLE_AURORA_WAVES));
+    public static string GENERATOR_STYLE_VORONOI_MOSAIC => Get(nameof(GENERATOR_STYLE_VORONOI_MOSAIC));
+    public static string GENERATOR_STYLE_ATMOSPHERIC_RIDGES => Get(nameof(GENERATOR_STYLE_ATMOSPHERIC_RIDGES));
 
     /// <summary>
     /// Resolves the localized display name for a generator style ID.
@@ -220,9 +221,10 @@ public static class Strings
     {
         "BlurBlobs" => GENERATOR_STYLE_BLUR_BLOBS,
         "LowPoly" => GENERATOR_STYLE_LOW_POLY,
-        "PerlinFlow" => GENERATOR_STYLE_PERLIN_FLOW,
         "RadialGradient" => GENERATOR_STYLE_RADIAL_GRADIENT,
-        "GeometricShapes" => GENERATOR_STYLE_GEOMETRIC_SHAPES,
+        "AuroraWaves" => GENERATOR_STYLE_AURORA_WAVES,
+        "VoronoiMosaic" => GENERATOR_STYLE_VORONOI_MOSAIC,
+        "AtmosphericRidges" => GENERATOR_STYLE_ATMOSPHERIC_RIDGES,
         _ => styleId
     };
 
@@ -416,9 +418,10 @@ public static class Strings
 
         [nameof(GENERATOR_STYLE_BLUR_BLOBS)] = "Blur Blobs",
         [nameof(GENERATOR_STYLE_LOW_POLY)] = "Low Poly",
-        [nameof(GENERATOR_STYLE_PERLIN_FLOW)] = "Perlin Flow",
         [nameof(GENERATOR_STYLE_RADIAL_GRADIENT)] = "Radial Gradient",
-        [nameof(GENERATOR_STYLE_GEOMETRIC_SHAPES)] = "Geometric Shapes",
+        [nameof(GENERATOR_STYLE_AURORA_WAVES)] = "Aurora Waves",
+        [nameof(GENERATOR_STYLE_VORONOI_MOSAIC)] = "Voronoi Mosaic",
+        [nameof(GENERATOR_STYLE_ATMOSPHERIC_RIDGES)] = "Atmospheric Ridges",
 
         [nameof(APP_TAB_PALETTES)] = "Color Palettes",
         [nameof(APP_GROUP_PALETTE_CONFIG)] = "Weather Palette Customization",

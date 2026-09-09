@@ -67,7 +67,7 @@ public sealed class BlurBlobsGenerator(ILogger<BlurBlobsGenerator> logger) : IWa
             canvas.DrawRect(SKRect.Create(width, height), darken);
         }
 
-        SaveJpeg(surface, outputPath);
+        SaveImage(surface, outputPath);
         return Task.FromResult(outputPath);
     }
 
@@ -103,11 +103,14 @@ public sealed class BlurBlobsGenerator(ILogger<BlurBlobsGenerator> logger) : IWa
         }
     }
 
-    private static void SaveJpeg(SKSurface surface, string path)
+    private static void SaveImage(SKSurface surface, string path)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         using var image = surface.Snapshot();
-        using var data  = image.Encode(SKEncodedImageFormat.Jpeg, 100);
+        var format = path.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || path.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)
+            ? SKEncodedImageFormat.Jpeg
+            : SKEncodedImageFormat.Png;
+        using var data = image.Encode(format, 100);
         File.WriteAllBytes(path, data.ToArray());
     }
 }

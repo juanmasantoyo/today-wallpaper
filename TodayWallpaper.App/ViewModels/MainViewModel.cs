@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Microsoft.Extensions.Logging;
 using TodayWallpaper.Core.Generators;
@@ -50,6 +51,25 @@ public sealed class MainViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    // ── Commands ─────────────────────────────────────────────────────────────
+    public ICommand GenerateNowCommand { get; }
+    public ICommand DetectLocationCommand { get; }
+    public ICommand RefreshWeatherCommand { get; }
+    public ICommand ApplyWallpaperCommand { get; }
+    public ICommand TogglePinCommand { get; }
+    public ICommand DeleteWallpaperCommand { get; }
+    public ICommand OpenViewerCommand { get; }
+    public ICommand NewPaletteCommand { get; }
+    public ICommand DuplicatePaletteCommand { get; }
+    public ICommand DeletePaletteCommand { get; }
+    public ICommand AddPrimaryColorCommand { get; }
+    public ICommand RemovePrimaryColorCommand { get; }
+    public ICommand AddSecondaryColorCommand { get; }
+    public ICommand RemoveSecondaryColorCommand { get; }
+    public ICommand PickColorCommand { get; }
+    public ICommand ResetConditionCommand { get; }
+    public ICommand ResetAllPalettesCommand { get; }
+
     public MainViewModel(
         ISettingsStore settingsStore,
         IHistoryStore historyStore,
@@ -73,6 +93,24 @@ public sealed class MainViewModel : INotifyPropertyChanged
         _paletteConfigLoader = paletteConfigLoader;
         _logger = logger;
         UpdateGeneratorStyleOptions();
+
+        GenerateNowCommand = new RelayCommand(async () => await GenerateNowAsync(), () => IsNotBusy);
+        DetectLocationCommand = new RelayCommand(async () => await DetectLocationAsync(), () => IsNotBusy);
+        RefreshWeatherCommand = new RelayCommand(async () => await RefreshWeatherAsync(), () => IsNotBusy);
+        ApplyWallpaperCommand = new RelayCommand(ApplySelectedWallpaper, () => HasSelectedHistoryItem);
+        TogglePinCommand = new RelayCommand(async () => await TogglePinSelectedAsync(), () => HasSelectedHistoryItem);
+        DeleteWallpaperCommand = new RelayCommand(async () => await ConfirmAndDeleteSelectedAsync(), () => HasSelectedHistoryItem);
+        OpenViewerCommand = new RelayCommand(OpenSelectedInViewer, () => HasSelectedHistoryItem);
+        NewPaletteCommand = new RelayCommand(AddNewPalette);
+        DuplicatePaletteCommand = new RelayCommand(DuplicateCurrentPalette, () => HasSelectedPalette);
+        DeletePaletteCommand = new RelayCommand(ConfirmAndDeleteCurrentPalette, () => CanDeletePalette);
+        AddPrimaryColorCommand = new RelayCommand(AddPrimaryColor, () => HasSelectedPalette);
+        RemovePrimaryColorCommand = new RelayCommand<PaletteColorViewModel>(RemovePrimaryColor, c => c is not null && c.CanRemove);
+        AddSecondaryColorCommand = new RelayCommand(AddSecondaryColor, () => HasSelectedPalette);
+        RemoveSecondaryColorCommand = new RelayCommand<PaletteColorViewModel>(RemoveSecondaryColor, c => c is not null && c.CanRemove);
+        PickColorCommand = new RelayCommand<PaletteColorViewModel>(PickColor);
+        ResetConditionCommand = new RelayCommand(ConfirmAndResetCurrentConditionPalettes);
+        ResetAllPalettesCommand = new RelayCommand(ConfirmAndResetAllPalettes);
     }
 
     // ── General State ────────────────────────────────────────────────────────
@@ -1199,6 +1237,60 @@ public sealed class MainViewModel : INotifyPropertyChanged
         LoadActivePalettesForCurrentSelection();
         StatusMessage = Strings.APP_PALETTE_RESET_MSG;
         TriggerAutoSavePalettes(delayMs: 0);
+    }
+
+    private async Task ConfirmAndDeleteSelectedAsync()
+    {
+        if (SelectedHistoryItem is null) return;
+        var res = System.Windows.MessageBox.Show(
+            "¿Deseas eliminar este fondo de pantalla del historial?",
+            "Eliminar Fondo",
+            System.Windows.MessageBoxButton.YesNo,
+            System.Windows.MessageBoxImage.Question);
+        if (res == System.Windows.MessageBoxResult.Yes)
+        {
+            await DeleteSelectedAsync();
+        }
+    }
+
+    private void ConfirmAndDeleteCurrentPalette()
+    {
+        if (SelectedPalette is null || !CanDeletePalette) return;
+        var res = System.Windows.MessageBox.Show(
+            $"¿Deseas eliminar la paleta '{SelectedPalette.Name}'?",
+            "Eliminar Paleta",
+            System.Windows.MessageBoxButton.YesNo,
+            System.Windows.MessageBoxImage.Question);
+        if (res == System.Windows.MessageBoxResult.Yes)
+        {
+            DeleteCurrentPalette();
+        }
+    }
+
+    private void ConfirmAndResetCurrentConditionPalettes()
+    {
+        var res = System.Windows.MessageBox.Show(
+            "¿Deseas restablecer las paletas de la condición climática actual a sus valores por defecto?",
+            "Restablecer Condición",
+            System.Windows.MessageBoxButton.YesNo,
+            System.Windows.MessageBoxImage.Warning);
+        if (res == System.Windows.MessageBoxResult.Yes)
+        {
+            ResetCurrentConditionPalettes();
+        }
+    }
+
+    private void ConfirmAndResetAllPalettes()
+    {
+        var res = System.Windows.MessageBox.Show(
+            "¿Deseas restablecer TODAS las paletas de colores a sus valores de fábrica? Se perderán las modificaciones personalizadas.",
+            "Restablecer Todas las Paletas",
+            System.Windows.MessageBoxButton.YesNo,
+            System.Windows.MessageBoxImage.Warning);
+        if (res == System.Windows.MessageBoxResult.Yes)
+        {
+            ResetAllPalettes();
+        }
     }
 
     private void Notify([CallerMemberName] string? name = null)

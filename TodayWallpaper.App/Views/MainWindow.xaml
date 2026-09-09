@@ -3,15 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:TodayWallpaper.Core.Localization;assembly=TodayWallpaper.Core"
         Title="{x:Static loc:Strings.APP_MAIN_WINDOW_TITLE}"
-        Width="980" Height="700"
-        MinWidth="800" MinHeight="540"
-        FontFamily="Segoe UI" FontSize="12"
+        Width="1200" Height="820"
+        MinWidth="1000" MinHeight="680"
+        FontFamily="Segoe UI" FontSize="13"
+        Background="{DynamicResource WindowBackgroundBrush}"
         WindowStartupLocation="CenterScreen">
-
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-
-    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,139 +15,207 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Main Tab Control -->
-        <TabControl Grid.Row="0" Margin="8,8,8,4">
+        <!-- Main Tab Navigation -->
+        <TabControl Grid.Row="0"
+                    Style="{StaticResource FluentTabControl}"
+                    ItemContainerStyle="{StaticResource FluentTabItem}"
+                    Margin="16,12,16,8">
 
-            <!-- ══ TAB 1: Programación y Generación ══ -->
+            <!-- ══ TAB 1: Programación y Estilo ══ -->
             <TabItem Header="{x:Static loc:Strings.APP_TAB_SCHEDULE}">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel Margin="8">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="4,8,8,8">
+                    <StackPanel>
 
-                        <!-- Automation Schedule Group -->
-                        <GroupBox Header="{x:Static loc:Strings.APP_GROUP_SCHEDULE}">
+                        <!-- Card 1: Automation Schedule -->
+                        <Border Style="{StaticResource FluentCard}">
                             <StackPanel>
+                                <TextBlock Text="{x:Static loc:Strings.APP_GROUP_SCHEDULE}"
+                                           Style="{StaticResource FluentSectionHeader}"
+                                           Margin="0,0,0,12"/>
+
+                                <!-- Enable Toggle -->
                                 <CheckBox Content="{x:Static loc:Strings.APP_CHECK_ENABLE_SCHEDULE}"
                                           IsChecked="{Binding IsEnabled}"
-                                          FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                          FontWeight="SemiBold"
+                                          FontSize="14"
+                                          Margin="0,0,0,14"/>
 
-                                <TextBlock Text="{x:Static loc:Strings.APP_LABEL_CADENCE}" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                                <TextBlock Text="{x:Static loc:Strings.APP_LABEL_CADENCE}"
+                                           FontWeight="SemiBold"
+                                           Margin="0,0,0,8"/>
 
-                                <!-- Interval mode option -->
-                                <StackPanel Orientation="Horizontal" Margin="16,0,0,8" VerticalAlignment="Center">
+                                <!-- Interval Mode -->
+                                <StackPanel Orientation="Horizontal" Margin="16,0,0,10" VerticalAlignment="Center">
                                     <RadioButton Content="{x:Static loc:Strings.APP_RADIO_INTERVAL}"
                                                  IsChecked="{Binding IsIntervalMode}"
                                                  IsEnabled="{Binding IsEnabled}"
                                                  GroupName="CadenceGroup"
                                                  VerticalAlignment="Center"/>
                                     <TextBox Text="{Binding RefreshIntervalHours, UpdateSourceTrigger=PropertyChanged}"
+                                             Style="{StaticResource FluentTextBox}"
                                              IsEnabled="{Binding IsEnabled}"
-                                             Width="75" Margin="8,0,8,0" TextAlignment="Left"/>
-                                    <TextBlock Text="{x:Static loc:Strings.APP_TEXT_HOURS_SUFFIX}" VerticalAlignment="Center"/>
+                                             Width="70" Margin="12,0,8,0"
+                                             TextAlignment="Center"/>
+                                    <TextBlock Text="{x:Static loc:Strings.APP_TEXT_HOURS_SUFFIX}"
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextSecondaryBrush}"/>
                                 </StackPanel>
 
-                                <!-- Daily fixed time option -->
-                                <StackPanel Orientation="Horizontal" Margin="16,0,0,10" VerticalAlignment="Center">
+                                <!-- Daily Mode -->
+                                <StackPanel Orientation="Horizontal" Margin="16,0,0,14" VerticalAlignment="Center">
                                     <RadioButton Content="{x:Static loc:Strings.APP_RADIO_DAILY}"
                                                  IsChecked="{Binding IsDailyMode}"
                                                  IsEnabled="{Binding IsEnabled}"
                                                  GroupName="CadenceGroup"
                                                  VerticalAlignment="Center"/>
                                     <TextBox Text="{Binding DailyAtHour, UpdateSourceTrigger=PropertyChanged}"
+                                             Style="{StaticResource FluentTextBox}"
                                              IsEnabled="{Binding IsEnabled}"
-                                             Width="75" Margin="8,0,4,0" TextAlignment="Left"/>
-                                    <TextBlock Text=":" VerticalAlignment="Center"/>
+                                             Width="55" Margin="12,0,4,0"
+                                             TextAlignment="Center"/>
+                                    <TextBlock Text=":" VerticalAlignment="Center" FontWeight="Bold" Margin="2,0"/>
                                     <TextBox Text="{Binding DailyAtMinute, UpdateSourceTrigger=PropertyChanged}"
+                                             Style="{StaticResource FluentTextBox}"
                                              IsEnabled="{Binding IsEnabled}"
-                                             Width="75" Margin="4,0,8,0" TextAlignment="Left"/>
-                                    <TextBlock Text="{x:Static loc:Strings.APP_HINT_DAILY_FORMAT}" VerticalAlignment="Center"
-                                               Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                             Width="55" Margin="4,0,8,0"
+                                             TextAlignment="Center"/>
+                                    <TextBlock Text="{x:Static loc:Strings.APP_HINT_DAILY_FORMAT}"
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextSecondaryBrush}"/>
                                 </StackPanel>
 
-                                <Separator Margin="0,4,0,8"/>
+                                <Border BorderThickness="0,0,0,1"
+                                        BorderBrush="{DynamicResource DividerBrush}"
+                                        Margin="0,4,0,12"/>
 
-                                <!-- Run on startup if expired option -->
+                                <!-- Run on startup if expired -->
                                 <CheckBox Content="{x:Static loc:Strings.APP_CHECK_RUN_ON_STARTUP}"
                                           IsChecked="{Binding RunOnStartupIfExpired}"
                                           IsEnabled="{Binding IsEnabled}"
-                                          Margin="16,0,0,8"/>
+                                          Margin="16,0,0,14"/>
 
-                                <!-- Status Summary Indicator -->
-                                <Border Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}"
-                                        BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                                        BorderThickness="1" Padding="8,6" Margin="0,6,0,0">
-                                    <StackPanel>
-                                        <TextBlock FontWeight="SemiBold"
-                                                   Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}"
-                                                   Text="{Binding ScheduleStatusSummary}"/>
-                                        <TextBlock TextWrapping="Wrap" Margin="0,2,0,0"
-                                                   Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}">
-                                            <Run Text="{x:Static loc:Strings.APP_LABEL_LAST_GEN_PREFIX}"/>
-                                            <Run Text="{Binding LastGenerationText, Mode=OneWay}"/>
-                                        </TextBlock>
-                                    </StackPanel>
+                                <!-- Status Summary Indicator Card -->
+                                <Border Background="{DynamicResource InfoBackgroundBrush}"
+                                        BorderBrush="{DynamicResource InfoBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="6"
+                                        Padding="14,10"
+                                        Margin="0,4,0,0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="⏱️" FontSize="18"
+                                                   VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock FontWeight="SemiBold"
+                                                       FontSize="13"
+                                                       Foreground="{DynamicResource InfoTextBrush}"
+                                                       Text="{Binding ScheduleStatusSummary}"/>
+                                            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0"
+                                                       FontSize="12"
+                                                       Foreground="{DynamicResource InfoTextBrush}">
+                                                <Run Text="{x:Static loc:Strings.APP_LABEL_LAST_GEN_PREFIX}"/>
+                                                <Run Text="{Binding LastGenerationText, Mode=OneWay}" FontWeight="SemiBold"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
                                 </Border>
                             </StackPanel>
-                        </GroupBox>
+                        </Border>
 
-                        <!-- Generator & Visual Style Group -->
-                        <GroupBox Header="{x:Static loc:Strings.APP_GROUP_VISUAL_STYLE}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="180"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="34"/>
-                                    <RowDefinition Height="34"/>
-                                </Grid.RowDefinitions>
+                        <!-- Card 2: Visual Style & Generators -->
+                        <Border Style="{StaticResource FluentCard}">
+                            <StackPanel>
+                                <TextBlock Text="{x:Static loc:Strings.APP_GROUP_VISUAL_STYLE}"
+                                           Style="{StaticResource FluentSectionHeader}"
+                                           Margin="0,0,0,14"/>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_GENERATOR_STYLE}"
-                                       VerticalAlignment="Top" Margin="0,4,0,0"/>
-                                <ItemsControl Grid.Row="0" Grid.Column="1"
-                                              ItemsSource="{Binding GeneratorStyleOptions}"
-                                              Margin="0,4,0,8">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <CheckBox Content="{Binding DisplayName}"
-                                                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                                      Margin="0,4,16,4"
-                                                      VerticalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-
-                                <Label Grid.Row="1" Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_PALETTE_MODE}"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1"
-                                          ItemsSource="{Binding PaletteModes}"
-                                          SelectedItem="{Binding PaletteMode}"
-                                          VerticalAlignment="Center"/>
-
-                                <Label Grid.Row="2" Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_HISTORY_MAX}"/>
-                                <Grid Grid.Row="2" Grid.Column="1">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="180"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="45"/>
                                     </Grid.ColumnDefinitions>
-                                    <Slider Grid.Column="0" Minimum="10" Maximum="200" TickFrequency="10"
-                                            IsSnapToTickEnabled="True"
-                                            Value="{Binding HistoryMaxCount}"
-                                            VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding HistoryMaxCount}"
-                                               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Generator Style -->
+                                    <Label Grid.Row="0" Grid.Column="0"
+                                           Content="{x:Static loc:Strings.APP_LABEL_GENERATOR_STYLE}"
+                                           VerticalAlignment="Top"
+                                           FontWeight="SemiBold"
+                                           Margin="0,4,0,12"/>
+                                    <ItemsControl Grid.Row="0" Grid.Column="1"
+                                                  ItemsSource="{Binding GeneratorStyleOptions}"
+                                                  Margin="0,4,0,14">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <CheckBox Content="{Binding DisplayName}"
+                                                          IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                                          Margin="0,4,20,6"
+                                                          VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <!-- Palette Mode -->
+                                    <Label Grid.Row="1" Grid.Column="0"
+                                           Content="{x:Static loc:Strings.APP_LABEL_PALETTE_MODE}"
+                                           FontWeight="SemiBold"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,0,14"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="1"
+                                              Style="{StaticResource FluentComboBox}"
+                                              ItemsSource="{Binding PaletteModes}"
+                                              SelectedItem="{Binding PaletteMode}"
+                                              Width="260"
+                                              HorizontalAlignment="Left"
+                                              Margin="0,0,0,14"/>
+
+                                    <!-- History Max Count -->
+                                    <Label Grid.Row="2" Grid.Column="0"
+                                           Content="{x:Static loc:Strings.APP_LABEL_HISTORY_MAX}"
+                                           FontWeight="SemiBold"
+                                           VerticalAlignment="Center"/>
+                                    <Grid Grid.Row="2" Grid.Column="1" MaxWidth="360" HorizontalAlignment="Left">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="260"/>
+                                            <ColumnDefinition Width="60"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Slider Grid.Column="0" Minimum="10" Maximum="200" TickFrequency="10"
+                                                IsSnapToTickEnabled="True"
+                                                Value="{Binding HistoryMaxCount}"
+                                                VerticalAlignment="Center"/>
+                                        <Border Grid.Column="1"
+                                                Background="{DynamicResource CardHoverBackgroundBrush}"
+                                                BorderBrush="{DynamicResource CardBorderBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="4"
+                                                Padding="6,3"
+                                                Margin="10,0,0,0">
+                                            <TextBlock Text="{Binding HistoryMaxCount}"
+                                                       FontWeight="SemiBold"
+                                                       TextAlignment="Center"/>
+                                        </Border>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </GroupBox>
+                            </StackPanel>
+                        </Border>
 
                         <!-- Actions Bar -->
-                        <WrapPanel HorizontalAlignment="Right" Margin="0,8,0,0">
+                        <WrapPanel HorizontalAlignment="Right" Margin="0,4,0,12">
                             <Button Content="{x:Static loc:Strings.APP_BTN_GENERATE_NOW}"
-                                    Click="GenerateNowClick"/>
+                                    Style="{StaticResource PrimaryButton}"
+                                    Command="{Binding GenerateNowCommand}"/>
                         </WrapPanel>
 
                     </StackPanel>
@@ -160,104 +224,177 @@
 
             <!-- ══ TAB 2: Ubicación y Clima ══ -->
             <TabItem Header="{x:Static loc:Strings.APP_TAB_LOCATION_WEATHER}">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel Margin="8">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="4,8,8,8">
+                    <StackPanel>
 
-                        <!-- Location Configuration Group -->
-                        <GroupBox Header="{x:Static loc:Strings.APP_GROUP_LOCATION}">
+                        <!-- Card 1: Location Settings -->
+                        <Border Style="{StaticResource FluentCard}">
                             <StackPanel>
+                                <TextBlock Text="{x:Static loc:Strings.APP_GROUP_LOCATION}"
+                                           Style="{StaticResource FluentSectionHeader}"
+                                           Margin="0,0,0,14"/>
+
+                                <!-- Auto Location -->
                                 <RadioButton Content="{x:Static loc:Strings.APP_RADIO_AUTO_LOCATION}"
                                              IsChecked="{Binding IsAutoLocation}"
                                              GroupName="LocationModeGroup"
-                                             Margin="0,0,0,4"/>
-                                <TextBlock TextWrapping="Wrap" Margin="20,0,0,10"
-                                           Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}">
-                                    <Run Text="{x:Static loc:Strings.APP_LABEL_DETECTED_IP_PREFIX}"/>
-                                    <Run Text="{Binding DetectedLocationText, Mode=OneWay}" FontWeight="SemiBold"/>
-                                </TextBlock>
+                                             FontWeight="SemiBold"
+                                             Margin="0,0,0,6"/>
+                                <Border Background="{DynamicResource CardHoverBackgroundBrush}"
+                                        BorderBrush="{DynamicResource CardBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="6"
+                                        Padding="12,8"
+                                        Margin="24,0,0,14">
+                                    <TextBlock TextWrapping="Wrap"
+                                               Foreground="{DynamicResource TextSecondaryBrush}">
+                                        <Run Text="{x:Static loc:Strings.APP_LABEL_DETECTED_IP_PREFIX}"/>
+                                        <Run Text="{Binding DetectedLocationText, Mode=OneWay}"
+                                             FontWeight="SemiBold"
+                                             Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                    </TextBlock>
+                                </Border>
 
+                                <!-- Manual Location -->
                                 <RadioButton Content="{x:Static loc:Strings.APP_RADIO_MANUAL_LOCATION}"
                                              IsChecked="{Binding IsManualLocation}"
                                              GroupName="LocationModeGroup"
-                                             Margin="0,0,0,8"/>
+                                             FontWeight="SemiBold"
+                                             Margin="0,0,0,10"/>
 
-                                <Grid Margin="20,0,0,10" IsEnabled="{Binding IsManualLocation}">
+                                <Grid Margin="24,0,0,14" IsEnabled="{Binding IsManualLocation}">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="90"/>
                                         <ColumnDefinition Width="140"/>
-                                        <ColumnDefinition Width="20"/>
-                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="90"/>
                                         <ColumnDefinition Width="140"/>
-                                        <ColumnDefinition Width="20"/>
-                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="70"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_LATITUDE}"/>
-                                    <TextBox Grid.Column="1" Text="{Binding ManualLatitude, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <Label Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_LATITUDE}" VerticalAlignment="Center"/>
+                                    <TextBox Grid.Column="1" Text="{Binding ManualLatitude, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource FluentTextBox}"/>
 
-                                    <Label Grid.Column="3" Content="{x:Static loc:Strings.APP_LABEL_LONGITUDE}"/>
-                                    <TextBox Grid.Column="4" Text="{Binding ManualLongitude, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <Label Grid.Column="3" Content="{x:Static loc:Strings.APP_LABEL_LONGITUDE}" VerticalAlignment="Center"/>
+                                    <TextBox Grid.Column="4" Text="{Binding ManualLongitude, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource FluentTextBox}"/>
 
-                                    <Label Grid.Column="6" Content="{x:Static loc:Strings.APP_LABEL_CITY}"/>
-                                    <TextBox Grid.Column="7" Text="{Binding ManualCity, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <Label Grid.Column="6" Content="{x:Static loc:Strings.APP_LABEL_CITY}" VerticalAlignment="Center"/>
+                                    <TextBox Grid.Column="7" Text="{Binding ManualCity, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource FluentTextBox}"/>
                                 </Grid>
 
                                 <WrapPanel HorizontalAlignment="Right" Margin="0,4,0,0">
                                     <Button Content="{x:Static loc:Strings.APP_BTN_DETECT_IP}"
-                                            Click="DetectLocationClick"/>
+                                            Style="{StaticResource SecondaryButton}"
+                                            Command="{Binding DetectLocationCommand}"/>
                                 </WrapPanel>
                             </StackPanel>
-                        </GroupBox>
+                        </Border>
 
-                        <!-- Weather Summary Group -->
-                        <GroupBox Header="{x:Static loc:Strings.APP_GROUP_WEATHER_DATA}">
+                        <!-- Card 2: Live Weather Summary -->
+                        <Border Style="{StaticResource FluentCard}">
                             <StackPanel>
-                                <Grid Margin="0,4,0,8">
+                                <Grid Margin="0,0,0,14">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="140"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="140"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="26"/>
-                                        <RowDefinition Height="26"/>
-                                        <RowDefinition Height="26"/>
-                                        <RowDefinition Height="26"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Label Grid.Row="0" Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_WEATHER_LOCATION}" FontWeight="SemiBold"/>
-                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding WeatherSummaryTitle}" VerticalAlignment="Center"/>
-
-                                    <Label Grid.Row="0" Grid.Column="2" Content="{x:Static loc:Strings.APP_LABEL_WEATHER_CONDITION}" FontWeight="SemiBold"/>
-                                    <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding WeatherConditionText}" VerticalAlignment="Center"/>
-
-                                    <Label Grid.Row="1" Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_WEATHER_TEMP}" FontWeight="SemiBold"/>
-                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding WeatherTemperatureText}" VerticalAlignment="Center"/>
-
-                                    <Label Grid.Row="1" Grid.Column="2" Content="{x:Static loc:Strings.APP_LABEL_WEATHER_WIND}" FontWeight="SemiBold"/>
-                                    <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding WeatherWindText}" VerticalAlignment="Center"/>
-
-                                    <Label Grid.Row="2" Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_WEATHER_HUMIDITY}" FontWeight="SemiBold"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding WeatherHumidityText}" VerticalAlignment="Center"/>
-
-                                    <Label Grid.Row="2" Grid.Column="2" Content="{x:Static loc:Strings.APP_LABEL_WEATHER_CLOUDS}" FontWeight="SemiBold"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding WeatherCloudCoverText}" VerticalAlignment="Center"/>
-
-                                    <Label Grid.Row="3" Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_WEATHER_PRECIP}" FontWeight="SemiBold"/>
-                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding WeatherPrecipitationText}" VerticalAlignment="Center"/>
-
-                                    <Label Grid.Row="3" Grid.Column="2" Content="{x:Static loc:Strings.APP_LABEL_WEATHER_VISIBILITY}" FontWeight="SemiBold"/>
-                                    <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding WeatherVisibilityText}" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="0"
+                                               Text="{x:Static loc:Strings.APP_GROUP_WEATHER_DATA}"
+                                               Style="{StaticResource FluentSectionHeader}"
+                                               VerticalAlignment="Center"/>
+                                    <Button Grid.Column="1"
+                                            Content="{x:Static loc:Strings.APP_BTN_REFRESH_WEATHER}"
+                                            Style="{StaticResource SecondaryButton}"
+                                            Command="{Binding RefreshWeatherCommand}"/>
                                 </Grid>
 
-                                <WrapPanel HorizontalAlignment="Right" Margin="0,4,0,0">
-                                    <Button Content="{x:Static loc:Strings.APP_BTN_REFRESH_WEATHER}"
-                                            Click="RefreshWeatherClick"/>
-                                </WrapPanel>
+                                <!-- Weather Grid Metric Tiles -->
+                                <UniformGrid Columns="4" Rows="2" Margin="0,4,0,0">
+                                    
+                                    <!-- Tile 1: Location -->
+                                    <Border Style="{StaticResource FluentCardSubtle}" Margin="4">
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Static loc:Strings.APP_LABEL_WEATHER_LOCATION}"
+                                                       Style="{StaticResource FluentCaption}" Margin="0,0,0,2"/>
+                                            <TextBlock Text="{Binding WeatherSummaryTitle}"
+                                                       FontWeight="SemiBold" FontSize="14" TextTrimming="CharacterEllipsis"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Tile 2: Condition -->
+                                    <Border Style="{StaticResource FluentCardSubtle}" Margin="4">
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Static loc:Strings.APP_LABEL_WEATHER_CONDITION}"
+                                                       Style="{StaticResource FluentCaption}" Margin="0,0,0,2"/>
+                                            <TextBlock Text="{Binding WeatherConditionText}"
+                                                       FontWeight="SemiBold" FontSize="14" TextTrimming="CharacterEllipsis"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Tile 3: Temperature -->
+                                    <Border Style="{StaticResource FluentCardSubtle}" Margin="4">
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Static loc:Strings.APP_LABEL_WEATHER_TEMP}"
+                                                       Style="{StaticResource FluentCaption}" Margin="0,0,0,2"/>
+                                            <TextBlock Text="{Binding WeatherTemperatureText}"
+                                                       FontWeight="SemiBold" FontSize="14" TextTrimming="CharacterEllipsis"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Tile 4: Wind -->
+                                    <Border Style="{StaticResource FluentCardSubtle}" Margin="4">
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Static loc:Strings.APP_LABEL_WEATHER_WIND}"
+                                                       Style="{StaticResource FluentCaption}" Margin="0,0,0,2"/>
+                                            <TextBlock Text="{Binding WeatherWindText}"
+                                                       FontWeight="SemiBold" FontSize="14" TextTrimming="CharacterEllipsis"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Tile 5: Humidity -->
+                                    <Border Style="{StaticResource FluentCardSubtle}" Margin="4">
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Static loc:Strings.APP_LABEL_WEATHER_HUMIDITY}"
+                                                       Style="{StaticResource FluentCaption}" Margin="0,0,0,2"/>
+                                            <TextBlock Text="{Binding WeatherHumidityText}"
+                                                       FontWeight="SemiBold" FontSize="14" TextTrimming="CharacterEllipsis"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Tile 6: Clouds -->
+                                    <Border Style="{StaticResource FluentCardSubtle}" Margin="4">
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Static loc:Strings.APP_LABEL_WEATHER_CLOUDS}"
+                                                       Style="{StaticResource FluentCaption}" Margin="0,0,0,2"/>
+                                            <TextBlock Text="{Binding WeatherCloudCoverText}"
+                                                       FontWeight="SemiBold" FontSize="14" TextTrimming="CharacterEllipsis"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Tile 7: Precip -->
+                                    <Border Style="{StaticResource FluentCardSubtle}" Margin="4">
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Static loc:Strings.APP_LABEL_WEATHER_PRECIP}"
+                                                       Style="{StaticResource FluentCaption}" Margin="0,0,0,2"/>
+                                            <TextBlock Text="{Binding WeatherPrecipitationText}"
+                                                       FontWeight="SemiBold" FontSize="14" TextTrimming="CharacterEllipsis"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Tile 8: Visibility -->
+                                    <Border Style="{StaticResource FluentCardSubtle}" Margin="4">
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Static loc:Strings.APP_LABEL_WEATHER_VISIBILITY}"
+                                                       Style="{StaticResource FluentCaption}" Margin="0,0,0,2"/>
+                                            <TextBlock Text="{Binding WeatherVisibilityText}"
+                                                       FontWeight="SemiBold" FontSize="14" TextTrimming="CharacterEllipsis"/>
+                                        </StackPanel>
+                                    </Border>
+                                </UniformGrid>
                             </StackPanel>
-                        </GroupBox>
+                        </Border>
 
                     </StackPanel>
                 </ScrollViewer>
@@ -265,56 +402,82 @@
 
             <!-- ══ TAB 3: Historial de Wallpapers ══ -->
             <TabItem Header="{x:Static loc:Strings.APP_TAB_HISTORY}">
-                <Grid Margin="8">
+                <Grid Margin="4,8,8,8">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="380" MinWidth="260"/>
+                        <ColumnDefinition Width="400" MinWidth="280"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- History List -->
-                    <GroupBox Grid.Column="0" Header="{x:Static loc:Strings.APP_GROUP_HISTORY_LIST}" Margin="0,0,8,0">
-                        <ListView ItemsSource="{Binding HistoryItems}"
-                                  SelectedItem="{Binding SelectedHistoryItem}"
-                                  Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                                  Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Margin="4,3">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="54"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
+                    <!-- History List Card -->
+                    <Border Grid.Column="0" Style="{StaticResource FluentCard}" Margin="0,0,12,0" Padding="12">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                                        <!-- Mini thumbnail -->
-                                        <Border Grid.Column="0" Width="48" Height="30"
-                                                BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                                                BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"
-                                                Margin="0,0,6,0">
-                                            <Image Source="{Binding Thumbnail}" Stretch="UniformToFill"/>
+                            <TextBlock Grid.Row="0"
+                                       Text="{x:Static loc:Strings.APP_GROUP_HISTORY_LIST}"
+                                       Style="{StaticResource FluentSectionHeader}"
+                                       Margin="0,0,0,10"/>
+
+                            <ListView Grid.Row="1"
+                                      ItemsSource="{Binding HistoryItems}"
+                                      SelectedItem="{Binding SelectedHistoryItem}"
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{DynamicResource CardBackgroundBrush}"
+                                                BorderBrush="{DynamicResource CardBorderBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="6"
+                                                Margin="0,3"
+                                                Padding="8,6">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="64"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Thumbnail -->
+                                                <Border Grid.Column="0" Width="56" Height="36"
+                                                        CornerRadius="4" ClipToBounds="True"
+                                                        BorderBrush="{DynamicResource CardBorderBrush}"
+                                                        BorderThickness="1"
+                                                        Background="{DynamicResource CardHoverBackgroundBrush}"
+                                                        Margin="0,0,10,0">
+                                                    <Image Source="{Binding Thumbnail}" Stretch="UniformToFill"/>
+                                                </Border>
+
+                                                <!-- Info -->
+                                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding DisplayTitle}"
+                                                               FontWeight="SemiBold"
+                                                               FontSize="13"/>
+                                                    <TextBlock Text="{Binding DisplaySubtitle}"
+                                                               Foreground="{DynamicResource TextSecondaryBrush}"
+                                                               FontSize="11" Margin="0,2,0,0"/>
+                                                </StackPanel>
+
+                                                <!-- Pin Badge -->
+                                                <TextBlock Grid.Column="2" Text="📌"
+                                                           Visibility="{Binding Pinned, Converter={StaticResource BoolToVis}}"
+                                                           VerticalAlignment="Center"
+                                                           FontSize="14"
+                                                           Margin="6,0,4,0"/>
+                                            </Grid>
                                         </Border>
-
-                                        <!-- Info -->
-                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding DisplayTitle}" FontWeight="SemiBold"/>
-                                            <TextBlock Text="{Binding DisplaySubtitle}"
-                                                       Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
-                                                       FontSize="11"/>
-                                        </StackPanel>
-
-                                        <!-- Pin Badge -->
-                                        <TextBlock Grid.Column="2" Text="📌"
-                                                   Visibility="{Binding Pinned, Converter={StaticResource BoolToVis}}"
-                                                   VerticalAlignment="Center" Margin="4,0,0,0"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </GroupBox>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                    </Border>
 
                     <!-- Selected Wallpaper Details & Preview -->
-                    <GroupBox Grid.Column="1" Header="{x:Static loc:Strings.APP_GROUP_HISTORY_DETAILS}">
+                    <Border Grid.Column="1" Style="{StaticResource FluentCard}" Padding="16">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
@@ -324,17 +487,22 @@
 
                             <!-- Preview container -->
                             <Border Grid.Row="0"
-                                    BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                                    BorderBrush="{DynamicResource CardBorderBrush}"
                                     BorderThickness="1"
-                                    Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"
-                                    Margin="0,0,0,8">
+                                    CornerRadius="8"
+                                    Background="#1A1A1A"
+                                    ClipToBounds="True"
+                                    Margin="0,0,0,14">
                                 <Grid>
-                                    <Image Source="{Binding SelectedHistoryItem.Thumbnail}" Stretch="Uniform"
+                                    <Image Source="{Binding SelectedHistoryItem.Thumbnail}"
+                                           Stretch="Uniform"
                                            RenderOptions.BitmapScalingMode="HighQuality"/>
 
                                     <TextBlock Text="{x:Static loc:Strings.APP_HINT_HISTORY_EMPTY}"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Foreground="White" FontSize="14">
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="#88FFFFFF"
+                                               FontSize="14">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -350,75 +518,98 @@
                             </Border>
 
                             <!-- Metadata details -->
-                            <StackPanel Grid.Row="1" Margin="0,0,0,8" IsEnabled="{Binding HasSelectedHistoryItem}">
-                                <TextBlock FontWeight="SemiBold" FontSize="13" Text="{Binding SelectedHistoryItem.DisplayTitle}"/>
-                                <TextBlock Text="{Binding SelectedHistoryItem.DisplaySubtitle}"
-                                           Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                            </StackPanel>
+                            <Border Grid.Row="1"
+                                    Background="{DynamicResource CardHoverBackgroundBrush}"
+                                    BorderBrush="{DynamicResource CardBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="6"
+                                    Padding="12,10"
+                                    Margin="0,0,0,14"
+                                    IsEnabled="{Binding HasSelectedHistoryItem}">
+                                <StackPanel>
+                                    <TextBlock FontWeight="SemiBold" FontSize="14"
+                                               Text="{Binding SelectedHistoryItem.DisplayTitle}"/>
+                                    <TextBlock Text="{Binding SelectedHistoryItem.DisplaySubtitle}"
+                                               Foreground="{DynamicResource TextSecondaryBrush}"
+                                               FontSize="12" Margin="0,3,0,0"/>
+                                </StackPanel>
+                            </Border>
 
-                            <!-- Wallpaper Action Buttons -->
+                            <!-- Action Buttons -->
                             <WrapPanel Grid.Row="2" HorizontalAlignment="Right" IsEnabled="{Binding HasSelectedHistoryItem}">
                                 <Button Content="{x:Static loc:Strings.APP_BTN_HISTORY_APPLY}"
-                                        Click="ApplyClick"
+                                        Style="{StaticResource PrimaryButton}"
+                                        Command="{Binding ApplyWallpaperCommand}"
                                         Margin="0,0,8,0"/>
                                 <Button Content="{x:Static loc:Strings.APP_BTN_HISTORY_PIN}"
-                                        Click="PinClick"
+                                        Style="{StaticResource SecondaryButton}"
+                                        Command="{Binding TogglePinCommand}"
                                         Margin="0,0,8,0"/>
                                 <Button Content="{x:Static loc:Strings.APP_BTN_HISTORY_VIEW_FILE}"
-                                        Click="OpenViewerClick"
+                                        Style="{StaticResource SecondaryButton}"
+                                        Command="{Binding OpenViewerCommand}"
                                         Margin="0,0,8,0"/>
                                 <Button Content="{x:Static loc:Strings.APP_BTN_HISTORY_DELETE}"
-                                        Click="DeleteClick"/>
+                                        Style="{StaticResource DangerButton}"
+                                        Command="{Binding DeleteWallpaperCommand}"/>
                             </WrapPanel>
                         </Grid>
-                    </GroupBox>
+                    </Border>
                 </Grid>
             </TabItem>
 
             <!-- ══ TAB 4: Paletas de Colores ══ -->
             <TabItem Header="{x:Static loc:Strings.APP_TAB_PALETTES}">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel Margin="10">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="4,8,8,8">
+                    <StackPanel>
 
-                        <!-- Main Configuration & Palette Selector Group -->
-                        <GroupBox Header="{x:Static loc:Strings.APP_GROUP_PALETTE_CONFIG}" Margin="0,0,0,10">
-                            <StackPanel Margin="4">
+                        <!-- Header Selector Card -->
+                        <Border Style="{StaticResource FluentCard}">
+                            <StackPanel>
+                                <TextBlock Text="{x:Static loc:Strings.APP_GROUP_PALETTE_CONFIG}"
+                                           Style="{StaticResource FluentSectionHeader}"
+                                           Margin="0,0,0,6"/>
                                 <TextBlock Text="{x:Static loc:Strings.APP_PALETTE_DESCRIPTION}"
-                                           TextWrapping="Wrap" Margin="0,0,0,12"
-                                           Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                           TextWrapping="Wrap"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           Margin="0,0,0,14"/>
 
-                                <!-- Row 1: Mode & Condition Selectors -->
-                                <Grid Margin="0,0,0,12">
+                                <!-- Mode & Condition Selectors -->
+                                <Grid Margin="0,0,0,14">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="220"/>
-                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="24"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="220"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <Label Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_EDIT_MODE}"
-                                           FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                           FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                     <ComboBox Grid.Column="1"
+                                              Style="{StaticResource FluentComboBox}"
                                               ItemsSource="{Binding PaletteModeOptions}"
                                               SelectedItem="{Binding SelectedPaletteEditModeOption}"
                                               DisplayMemberPath="DisplayName"
-                                              VerticalAlignment="Center" Padding="6,4"/>
+                                              VerticalAlignment="Center"/>
 
                                     <Label Grid.Column="3" Content="{x:Static loc:Strings.APP_LABEL_SELECT_CONDITION}"
-                                           FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                           FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                     <ComboBox Grid.Column="4"
+                                              Style="{StaticResource FluentComboBox}"
                                               ItemsSource="{Binding WeatherConditionOptions}"
                                               SelectedItem="{Binding SelectedPaletteWeatherConditionOption}"
                                               DisplayMemberPath="FullTitle"
-                                              VerticalAlignment="Center" Padding="6,4"/>
+                                              VerticalAlignment="Center"/>
                                 </Grid>
 
-                                <!-- Row 2: Palette Selection & Management Bar -->
-                                <Border Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"
-                                        BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                                        BorderThickness="1" CornerRadius="4" Padding="10,8" Margin="0,0,0,4">
+                                <!-- Palette Selection Bar -->
+                                <Border Background="{DynamicResource CardHoverBackgroundBrush}"
+                                        BorderBrush="{DynamicResource CardBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="6"
+                                        Padding="12,10">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
@@ -434,285 +625,351 @@
 
                                         <!-- Palette Selector -->
                                         <Label Grid.Column="0" Content="{x:Static loc:Strings.APP_LABEL_PALETTE_SELECT}"
-                                               FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                               FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,6,0"/>
                                         <ComboBox Grid.Column="1"
+                                                  Style="{StaticResource FluentComboBox}"
                                                   ItemsSource="{Binding ActivePalettes}"
                                                   SelectedItem="{Binding SelectedPalette}"
                                                   DisplayMemberPath="DisplayName"
-                                                  VerticalAlignment="Center" Padding="6,4"/>
+                                                  VerticalAlignment="Center"/>
 
                                         <!-- Palette Name Input -->
                                         <Label Grid.Column="3" Content="{x:Static loc:Strings.APP_LABEL_PALETTE_NAME}"
-                                               VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                               VerticalAlignment="Center" Margin="0,0,6,0"/>
                                         <TextBox Grid.Column="4"
+                                                 Style="{StaticResource FluentTextBox}"
                                                  Text="{Binding SelectedPalette.Name, UpdateSourceTrigger=PropertyChanged}"
-                                                 VerticalAlignment="Center" FontSize="12" Padding="6,3"
+                                                 VerticalAlignment="Center"
                                                  IsEnabled="{Binding HasSelectedPalette}"/>
 
                                         <!-- Enabled CheckBox -->
                                         <CheckBox Grid.Column="6"
                                                   Content="{x:Static loc:Strings.APP_CHECK_PALETTE_ENABLED}"
                                                   IsChecked="{Binding SelectedPalette.IsEnabled}"
-                                                  VerticalAlignment="Center" FontWeight="SemiBold"
+                                                  VerticalAlignment="Center"
+                                                  FontWeight="SemiBold"
                                                   IsEnabled="{Binding HasSelectedPalette}"/>
 
-                                        <!-- Palette Action Buttons -->
+                                        <!-- Actions -->
                                         <StackPanel Grid.Column="8" Orientation="Horizontal" VerticalAlignment="Center">
                                             <Button Content="{x:Static loc:Strings.APP_BTN_NEW_PALETTE}"
-                                                    Click="NewPaletteClick" Padding="8,4" Margin="0,0,6,0"/>
+                                                    Style="{StaticResource SecondaryButton}"
+                                                    Command="{Binding NewPaletteCommand}"
+                                                    Margin="0,0,6,0"/>
                                             <Button Content="{x:Static loc:Strings.APP_BTN_DUPLICATE_PALETTE}"
-                                                    Click="DuplicatePaletteClick" Padding="8,4" Margin="0,0,6,0"
+                                                    Style="{StaticResource SecondaryButton}"
+                                                    Command="{Binding DuplicatePaletteCommand}"
+                                                    Margin="0,0,6,0"
                                                     IsEnabled="{Binding HasSelectedPalette}"/>
                                             <Button Content="{x:Static loc:Strings.APP_BTN_DELETE_PALETTE}"
-                                                    Click="DeletePaletteClick" Padding="8,4"
-                                                    Foreground="#C9302C"
+                                                    Style="{StaticResource DangerButton}"
+                                                    Command="{Binding DeletePaletteCommand}"
                                                     IsEnabled="{Binding CanDeletePalette}"/>
                                         </StackPanel>
                                     </Grid>
                                 </Border>
-
                             </StackPanel>
-                        </GroupBox>
+                        </Border>
 
-                        <!-- Drag & Drop Hint -->
+                        <!-- Hint -->
                         <TextBlock Text="{x:Static loc:Strings.APP_HINT_DRAG_DROP}"
-                                   Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
-                                   FontSize="11" Margin="2,0,0,6"/>
+                                   Foreground="{DynamicResource TextSecondaryBrush}"
+                                   FontSize="12" Margin="4,0,0,8"/>
 
-                        <!-- Primary & Secondary Color Columns -->
-                        <Grid Margin="0,0,0,10" IsEnabled="{Binding HasSelectedPalette}">
+                        <!-- Primary & Secondary Color Matrix Columns -->
+                        <Grid Margin="0,0,0,12" IsEnabled="{Binding HasSelectedPalette}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="16"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <!-- Primary Colors Group (Left Column) -->
-                            <GroupBox Grid.Column="0" Header="{x:Static loc:Strings.APP_GROUP_PRIMARY_COLORS}">
-                                <Border x:Name="PrimaryDropZone"
-                                        AllowDrop="True"
-                                        Drop="ColorDropZone_Drop"
-                                        DragOver="ColorDropZone_DragOver"
-                                        Background="Transparent"
-                                        Padding="4">
-                                    <StackPanel>
-                                        <ItemsControl ItemsSource="{Binding SelectedPalette.PrimaryColors}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Border Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"
-                                                            BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                                                            BorderThickness="1" CornerRadius="4"
-                                                            Margin="0,3" Padding="6,4"
-                                                            PreviewMouseDown="ColorItem_PreviewMouseDown"
-                                                            MouseMove="ColorItem_MouseMove"
-                                                            Tag="{Binding}">
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                                <ColumnDefinition Width="34"/>
-                                                                <ColumnDefinition Width="90"/>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                            </Grid.ColumnDefinitions>
+                            <!-- Primary Colors Column -->
+                            <Border Grid.Column="0" Style="{StaticResource FluentCard}">
+                                <StackPanel>
+                                    <TextBlock Text="{x:Static loc:Strings.APP_GROUP_PRIMARY_COLORS}"
+                                               Style="{StaticResource FluentSectionHeader}"
+                                               Margin="0,0,0,10"/>
 
-                                                            <!-- Drag Handle -->
-                                                            <TextBlock Grid.Column="0" Text="⠿" FontSize="14"
-                                                                       Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
-                                                                       VerticalAlignment="Center" Margin="0,0,6,0"
-                                                                       Cursor="SizeAll" ToolTip="Arrastra para mover entre columnas"/>
+                                    <Border x:Name="PrimaryDropZone"
+                                            AllowDrop="True"
+                                            Drop="ColorDropZone_Drop"
+                                            DragOver="ColorDropZone_DragOver"
+                                            DragEnter="ColorDropZone_DragEnter"
+                                            DragLeave="ColorDropZone_DragLeave"
+                                            Background="Transparent"
+                                            BorderThickness="2"
+                                            BorderBrush="Transparent"
+                                            CornerRadius="6"
+                                            MinHeight="180"
+                                            Padding="4">
+                                        <StackPanel>
+                                            <ItemsControl ItemsSource="{Binding SelectedPalette.PrimaryColors}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Background="{DynamicResource CardHoverBackgroundBrush}"
+                                                                BorderBrush="{DynamicResource CardBorderBrush}"
+                                                                BorderThickness="1"
+                                                                CornerRadius="6"
+                                                                Margin="0,3"
+                                                                Padding="8,6"
+                                                                PreviewMouseDown="ColorItem_PreviewMouseDown"
+                                                                MouseMove="ColorItem_MouseMove"
+                                                                Tag="{Binding}">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="38"/>
+                                                                    <ColumnDefinition Width="95"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
 
-                                                            <!-- Swatch Preview (clickable) -->
-                                                            <Border Grid.Column="1" Width="28" Height="26"
-                                                                    Background="{Binding Brush}"
-                                                                    BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                                                                    BorderThickness="1.5" CornerRadius="3"
-                                                                    Cursor="Hand" ToolTip="{x:Static loc:Strings.APP_BTN_PICK_COLOR}"
-                                                                    MouseDown="SwatchPreview_MouseDown" Tag="{Binding}"
-                                                                    HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                                                <!-- Grip handle -->
+                                                                <TextBlock Grid.Column="0" Text="⠿" FontSize="16"
+                                                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                                                           VerticalAlignment="Center" Margin="0,0,8,0"
+                                                                           Cursor="SizeAll" ToolTip="Arrastra para mover entre columnas"/>
 
-                                                            <!-- Hex Editor -->
-                                                            <TextBox Grid.Column="2" Text="{Binding Hex, UpdateSourceTrigger=PropertyChanged}"
-                                                                     FontFamily="Consolas" FontSize="13" FontWeight="SemiBold"
-                                                                     VerticalAlignment="Center" HorizontalContentAlignment="Center"
-                                                                     Padding="4,3" Margin="4,0,4,0"/>
+                                                                <!-- Swatch Preview -->
+                                                                <Border Grid.Column="1" Width="30" Height="28"
+                                                                        Background="{Binding Brush}"
+                                                                        BorderBrush="{DynamicResource CardBorderBrush}"
+                                                                        BorderThickness="1.5"
+                                                                        CornerRadius="4"
+                                                                        Cursor="Hand"
+                                                                        ToolTip="{x:Static loc:Strings.APP_BTN_PICK_COLOR}"
+                                                                        MouseDown="SwatchPreview_MouseDown"
+                                                                        Tag="{Binding}"
+                                                                        HorizontalAlignment="Left"
+                                                                        VerticalAlignment="Center"/>
 
-                                                            <!-- Pick Color Button -->
-                                                            <Button Grid.Column="3" Content="🎨" ToolTip="{x:Static loc:Strings.APP_BTN_PICK_COLOR}"
-                                                                    Click="PickColorClick" Tag="{Binding}"
-                                                                    Padding="6,3" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                                                <!-- Hex Editor -->
+                                                                <TextBox Grid.Column="2"
+                                                                         Style="{StaticResource FluentTextBox}"
+                                                                         Text="{Binding Hex, UpdateSourceTrigger=PropertyChanged}"
+                                                                         FontFamily="Consolas" FontSize="13" FontWeight="SemiBold"
+                                                                         VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                                                                         Padding="4,3" Margin="4,0,6,0"/>
 
-                                                            <!-- Luminance Feedback -->
-                                                            <TextBlock Grid.Column="4" Text="{Binding LuminanceFeedback}"
-                                                                       VerticalAlignment="Center" FontSize="11" Margin="2,0,4,0"
-                                                                       TextTrimming="CharacterEllipsis">
-                                                                <TextBlock.Style>
-                                                                    <Style TargetType="TextBlock">
-                                                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                                                                        <Style.Triggers>
-                                                                            <DataTrigger Binding="{Binding IsLuminanceAcceptable}" Value="False">
-                                                                                <Setter Property="Foreground" Value="#D97706"/>
-                                                                                <Setter Property="FontWeight" Value="SemiBold"/>
-                                                                            </DataTrigger>
-                                                                        </Style.Triggers>
-                                                                    </Style>
-                                                                </TextBlock.Style>
-                                                            </TextBlock>
+                                                                <!-- Pick Color Button -->
+                                                                <Button Grid.Column="3" Content="🎨"
+                                                                        Style="{StaticResource SubtleIconButton}"
+                                                                        ToolTip="{x:Static loc:Strings.APP_BTN_PICK_COLOR}"
+                                                                        Click="PickColorClick" Tag="{Binding}"
+                                                                        Margin="0,0,6,0" VerticalAlignment="Center"/>
 
-                                                            <!-- Remove Button -->
-                                                            <Button Grid.Column="5" Content="✕" ToolTip="{x:Static loc:Strings.APP_BTN_REMOVE_COLOR}"
-                                                                    IsEnabled="{Binding CanRemove}"
-                                                                    Click="RemovePrimaryColorClick" Tag="{Binding}"
-                                                                    Padding="8,2" VerticalAlignment="Center"
-                                                                    FontWeight="Bold" Foreground="#C9302C"/>
-                                                        </Grid>
-                                                    </Border>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
+                                                                <!-- Luminance Status Pill -->
+                                                                <TextBlock Grid.Column="4" Text="{Binding LuminanceFeedback}"
+                                                                           VerticalAlignment="Center" FontSize="11" Margin="2,0,6,0"
+                                                                           TextTrimming="CharacterEllipsis">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+                                                                            <Style.Triggers>
+                                                                                <DataTrigger Binding="{Binding IsLuminanceAcceptable}" Value="False">
+                                                                                    <Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/>
+                                                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                                                </DataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
 
-                                        <!-- Add Color Button -->
-                                        <Button Content="{x:Static loc:Strings.APP_BTN_ADD_COLOR}"
-                                                Click="AddPrimaryColorClick"
-                                                HorizontalAlignment="Left" Margin="0,8,0,0" Padding="14,4"/>
-                                    </StackPanel>
-                                </Border>
-                            </GroupBox>
+                                                                <!-- Remove Button -->
+                                                                <Button Grid.Column="5" Content="✕"
+                                                                        Style="{StaticResource SubtleIconButton}"
+                                                                        ToolTip="{x:Static loc:Strings.APP_BTN_REMOVE_COLOR}"
+                                                                        IsEnabled="{Binding CanRemove}"
+                                                                        Click="RemovePrimaryColorClick" Tag="{Binding}"
+                                                                        Foreground="{DynamicResource DangerBrush}"
+                                                                        FontWeight="Bold"
+                                                                        VerticalAlignment="Center"/>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
 
-                            <!-- Secondary Colors Group (Right Column) -->
-                            <GroupBox Grid.Column="2" Header="{x:Static loc:Strings.APP_GROUP_SECONDARY_COLORS}">
-                                <Border x:Name="SecondaryDropZone"
-                                        AllowDrop="True"
-                                        Drop="ColorDropZone_Drop"
-                                        DragOver="ColorDropZone_DragOver"
-                                        Background="Transparent"
-                                        Padding="4">
-                                    <StackPanel>
-                                        <ItemsControl ItemsSource="{Binding SelectedPalette.SecondaryColors}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Border Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"
-                                                            BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                                                            BorderThickness="1" CornerRadius="4"
-                                                            Margin="0,3" Padding="6,4"
-                                                            PreviewMouseDown="ColorItem_PreviewMouseDown"
-                                                            MouseMove="ColorItem_MouseMove"
-                                                            Tag="{Binding}">
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                                <ColumnDefinition Width="34"/>
-                                                                <ColumnDefinition Width="90"/>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                            </Grid.ColumnDefinitions>
+                                            <!-- Add Color Button -->
+                                            <Button Content="{x:Static loc:Strings.APP_BTN_ADD_COLOR}"
+                                                    Style="{StaticResource SecondaryButton}"
+                                                    Command="{Binding AddPrimaryColorCommand}"
+                                                    HorizontalAlignment="Left"
+                                                    Margin="0,8,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
 
-                                                            <!-- Drag Handle -->
-                                                            <TextBlock Grid.Column="0" Text="⠿" FontSize="14"
-                                                                       Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
-                                                                       VerticalAlignment="Center" Margin="0,0,6,0"
-                                                                       Cursor="SizeAll" ToolTip="Arrastra para mover entre columnas"/>
+                            <!-- Secondary Colors Column -->
+                            <Border Grid.Column="2" Style="{StaticResource FluentCard}">
+                                <StackPanel>
+                                    <TextBlock Text="{x:Static loc:Strings.APP_GROUP_SECONDARY_COLORS}"
+                                               Style="{StaticResource FluentSectionHeader}"
+                                               Margin="0,0,0,10"/>
 
-                                                            <!-- Swatch Preview (clickable) -->
-                                                            <Border Grid.Column="1" Width="28" Height="26"
-                                                                    Background="{Binding Brush}"
-                                                                    BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                                                                    BorderThickness="1.5" CornerRadius="3"
-                                                                    Cursor="Hand" ToolTip="{x:Static loc:Strings.APP_BTN_PICK_COLOR}"
-                                                                    MouseDown="SwatchPreview_MouseDown" Tag="{Binding}"
-                                                                    HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <Border x:Name="SecondaryDropZone"
+                                            AllowDrop="True"
+                                            Drop="ColorDropZone_Drop"
+                                            DragOver="ColorDropZone_DragOver"
+                                            DragEnter="ColorDropZone_DragEnter"
+                                            DragLeave="ColorDropZone_DragLeave"
+                                            Background="Transparent"
+                                            BorderThickness="2"
+                                            BorderBrush="Transparent"
+                                            CornerRadius="6"
+                                            MinHeight="180"
+                                            Padding="4">
+                                        <StackPanel>
+                                            <ItemsControl ItemsSource="{Binding SelectedPalette.SecondaryColors}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Background="{DynamicResource CardHoverBackgroundBrush}"
+                                                                BorderBrush="{DynamicResource CardBorderBrush}"
+                                                                BorderThickness="1"
+                                                                CornerRadius="6"
+                                                                Margin="0,3"
+                                                                Padding="8,6"
+                                                                PreviewMouseDown="ColorItem_PreviewMouseDown"
+                                                                MouseMove="ColorItem_MouseMove"
+                                                                Tag="{Binding}">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="38"/>
+                                                                    <ColumnDefinition Width="95"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
 
-                                                            <!-- Hex Editor -->
-                                                            <TextBox Grid.Column="2" Text="{Binding Hex, UpdateSourceTrigger=PropertyChanged}"
-                                                                     FontFamily="Consolas" FontSize="13" FontWeight="SemiBold"
-                                                                     VerticalAlignment="Center" HorizontalContentAlignment="Center"
-                                                                     Padding="4,3" Margin="4,0,4,0"/>
+                                                                <!-- Grip handle -->
+                                                                <TextBlock Grid.Column="0" Text="⠿" FontSize="16"
+                                                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                                                           VerticalAlignment="Center" Margin="0,0,8,0"
+                                                                           Cursor="SizeAll" ToolTip="Arrastra para mover entre columnas"/>
 
-                                                            <!-- Pick Color Button -->
-                                                            <Button Grid.Column="3" Content="🎨" ToolTip="{x:Static loc:Strings.APP_BTN_PICK_COLOR}"
-                                                                    Click="PickColorClick" Tag="{Binding}"
-                                                                    Padding="6,3" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                                                <!-- Swatch Preview -->
+                                                                <Border Grid.Column="1" Width="30" Height="28"
+                                                                        Background="{Binding Brush}"
+                                                                        BorderBrush="{DynamicResource CardBorderBrush}"
+                                                                        BorderThickness="1.5"
+                                                                        CornerRadius="4"
+                                                                        Cursor="Hand"
+                                                                        ToolTip="{x:Static loc:Strings.APP_BTN_PICK_COLOR}"
+                                                                        MouseDown="SwatchPreview_MouseDown"
+                                                                        Tag="{Binding}"
+                                                                        HorizontalAlignment="Left"
+                                                                        VerticalAlignment="Center"/>
 
-                                                            <!-- Luminance Feedback -->
-                                                            <TextBlock Grid.Column="4" Text="{Binding LuminanceFeedback}"
-                                                                       VerticalAlignment="Center" FontSize="11" Margin="2,0,4,0"
-                                                                       TextTrimming="CharacterEllipsis">
-                                                                <TextBlock.Style>
-                                                                    <Style TargetType="TextBlock">
-                                                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                                                                        <Style.Triggers>
-                                                                            <DataTrigger Binding="{Binding IsLuminanceAcceptable}" Value="False">
-                                                                                <Setter Property="Foreground" Value="#D97706"/>
-                                                                                <Setter Property="FontWeight" Value="SemiBold"/>
-                                                                            </DataTrigger>
-                                                                        </Style.Triggers>
-                                                                    </Style>
-                                                                </TextBlock.Style>
-                                                            </TextBlock>
+                                                                <!-- Hex Editor -->
+                                                                <TextBox Grid.Column="2"
+                                                                         Style="{StaticResource FluentTextBox}"
+                                                                         Text="{Binding Hex, UpdateSourceTrigger=PropertyChanged}"
+                                                                         FontFamily="Consolas" FontSize="13" FontWeight="SemiBold"
+                                                                         VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                                                                         Padding="4,3" Margin="4,0,6,0"/>
 
-                                                            <!-- Remove Button -->
-                                                            <Button Grid.Column="5" Content="✕" ToolTip="{x:Static loc:Strings.APP_BTN_REMOVE_COLOR}"
-                                                                    IsEnabled="{Binding CanRemove}"
-                                                                    Click="RemoveSecondaryColorClick" Tag="{Binding}"
-                                                                    Padding="8,2" VerticalAlignment="Center"
-                                                                    FontWeight="Bold" Foreground="#C9302C"/>
-                                                        </Grid>
-                                                    </Border>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
+                                                                <!-- Pick Color Button -->
+                                                                <Button Grid.Column="3" Content="🎨"
+                                                                        Style="{StaticResource SubtleIconButton}"
+                                                                        ToolTip="{x:Static loc:Strings.APP_BTN_PICK_COLOR}"
+                                                                        Click="PickColorClick" Tag="{Binding}"
+                                                                        Margin="0,0,6,0" VerticalAlignment="Center"/>
 
-                                        <!-- Add Color Button -->
-                                        <Button Content="{x:Static loc:Strings.APP_BTN_ADD_COLOR}"
-                                                Click="AddSecondaryColorClick"
-                                                HorizontalAlignment="Left" Margin="0,8,0,0" Padding="14,4"/>
-                                    </StackPanel>
-                                </Border>
-                            </GroupBox>
+                                                                <!-- Luminance Status Pill -->
+                                                                <TextBlock Grid.Column="4" Text="{Binding LuminanceFeedback}"
+                                                                           VerticalAlignment="Center" FontSize="11" Margin="2,0,6,0"
+                                                                           TextTrimming="CharacterEllipsis">
+                                                                    <TextBlock.Style>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+                                                                            <Style.Triggers>
+                                                                                <DataTrigger Binding="{Binding IsLuminanceAcceptable}" Value="False">
+                                                                                    <Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/>
+                                                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                                                </DataTrigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </TextBlock.Style>
+                                                                </TextBlock>
+
+                                                                <!-- Remove Button -->
+                                                                <Button Grid.Column="5" Content="✕"
+                                                                        Style="{StaticResource SubtleIconButton}"
+                                                                        ToolTip="{x:Static loc:Strings.APP_BTN_REMOVE_COLOR}"
+                                                                        IsEnabled="{Binding CanRemove}"
+                                                                        Click="RemoveSecondaryColorClick" Tag="{Binding}"
+                                                                        Foreground="{DynamicResource DangerBrush}"
+                                                                        FontWeight="Bold"
+                                                                        VerticalAlignment="Center"/>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+
+                                            <!-- Add Color Button -->
+                                            <Button Content="{x:Static loc:Strings.APP_BTN_ADD_COLOR}"
+                                                    Style="{StaticResource SecondaryButton}"
+                                                    Command="{Binding AddSecondaryColorCommand}"
+                                                    HorizontalAlignment="Left"
+                                                    Margin="0,8,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
                         </Grid>
 
-                        <!-- Palette Preview Strip Group -->
-                        <GroupBox Header="{x:Static loc:Strings.APP_GROUP_PALETTE_PREVIEW}" Margin="0,0,0,10">
-                            <StackPanel Margin="4">
-                                <ItemsControl ItemsSource="{Binding SelectedPalette.PreviewBrushes}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <UniformGrid Rows="1" Height="30"/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border Background="{Binding}"
-                                                    BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                                                    BorderThickness="0.5"/>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                        <!-- Palette Preview Strip Card -->
+                        <Border Style="{StaticResource FluentCard}">
+                            <StackPanel>
+                                <TextBlock Text="{x:Static loc:Strings.APP_GROUP_PALETTE_PREVIEW}"
+                                           Style="{StaticResource FluentSectionHeader}"
+                                           Margin="0,0,0,10"/>
 
-                                <!-- Informative notice about recommended luminance -->
+                                <Border CornerRadius="6" ClipToBounds="True" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1">
+                                    <ItemsControl ItemsSource="{Binding SelectedPalette.PreviewBrushes}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Rows="1" Height="36"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="{Binding}"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Border>
+
                                 <TextBlock Text="{x:Static loc:Strings.APP_PALETTE_LUMINANCE_RECOMMENDATION}"
-                                           Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
-                                           FontSize="11" Margin="0,6,0,0"/>
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           FontSize="12" Margin="0,8,0,0"/>
 
-                                <!-- Warning info message if invalid hex format -->
                                 <TextBlock Text="{Binding SelectedPalette.ValidationMessage}"
-                                           Foreground="#D9534F" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource DangerBrush}"
+                                           FontWeight="SemiBold"
                                            Margin="0,4,0,0" TextWrapping="Wrap"
                                            Visibility="{Binding SelectedPalette.HasValidationErrors, Converter={StaticResource BoolToVis}}"/>
                             </StackPanel>
-                        </GroupBox>
+                        </Border>
 
                         <!-- Actions Bar -->
-                        <WrapPanel HorizontalAlignment="Right" Margin="0,0,0,4">
+                        <WrapPanel HorizontalAlignment="Right" Margin="0,4,0,12">
                             <Button Content="{x:Static loc:Strings.APP_BTN_RESET_CONDITION}"
-                                    Click="ResetConditionClick"
-                                    Margin="0,0,8,0" Padding="10,4"/>
+                                    Style="{StaticResource SecondaryButton}"
+                                    Command="{Binding ResetConditionCommand}"
+                                    Margin="0,0,8,0"/>
                             <Button Content="{x:Static loc:Strings.APP_BTN_RESET_ALL_PALETTES}"
-                                    Click="ResetAllPalettesClick"
-                                    Margin="0,0,8,0" Padding="10,4"/>
+                                    Style="{StaticResource SecondaryButton}"
+                                    Command="{Binding ResetAllPalettesCommand}"
+                                    Margin="0,0,8,0"/>
                             <Button Content="{x:Static loc:Strings.APP_BTN_GENERATE_NOW}"
-                                    Click="GenerateNowClick" Padding="12,4"/>
+                                    Style="{StaticResource PrimaryButton}"
+                                    Command="{Binding GenerateNowCommand}"/>
                         </WrapPanel>
 
                     </StackPanel>
@@ -720,14 +977,20 @@
             </TabItem>
         </TabControl>
 
-        <!-- Native Status Bar -->
-        <StatusBar Grid.Row="1">
+        <!-- Fluent Status Bar -->
+        <StatusBar Grid.Row="1"
+                   Background="{DynamicResource CardBackgroundBrush}"
+                   BorderBrush="{DynamicResource DividerBrush}"
+                   BorderThickness="0,1,0,0"
+                   Padding="16,6">
             <StatusBarItem>
-                <TextBlock Text="{Binding StatusMessage}" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding StatusMessage}"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
+                           VerticalAlignment="Center"/>
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
                 <TextBlock Text="{Binding ScheduleStatusSummary}"
-                           Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
                            VerticalAlignment="Center"/>
             </StatusBarItem>
         </StatusBar>

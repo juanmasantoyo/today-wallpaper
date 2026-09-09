@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using TodayWallpaper.Core.Generators;
 using TodayWallpaper.Core.Localization;
 using TodayWallpaper.Core.Palette;
@@ -15,12 +16,15 @@ public sealed class SettingsViewModel : INotifyPropertyChanged
     private readonly WallpaperGeneratorFactory _generatorFactory;
     private AppSettings _settings = new();
 
+    public ICommand SaveCommand { get; }
+
     public SettingsViewModel(
         ISettingsStore settingsStore,
         WallpaperGeneratorFactory generatorFactory)
     {
         _settingsStore = settingsStore;
         _generatorFactory = generatorFactory;
+        SaveCommand = new RelayCommand(async () => await SaveAsync());
         UpdateGeneratorStyleOptions();
     }
 

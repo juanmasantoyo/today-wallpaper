@@ -68,14 +68,14 @@ public class WallpaperPipeline(
         int height = screenResolution.GetHeight();
 
         var timestamp = DateTime.Now;
-        var fileName = $"history/{timestamp:yyyyMMdd_HHmm}_{weather.Condition}.jpg";
+        var fileName = $"history/{timestamp:yyyyMMdd_HHmm}_{weather.Condition}.png";
         var fullPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "TodayWallpaper", fileName);
 
         var outputPath = await generator.GenerateAsync(palette, weather, width, height, fullPath, cancellationToken);
 
-        // Copy to current_wallpaper.jpg for quick re-application.
+        // Copy to current_wallpaper.png for quick re-application.
         var currentPath = WallpaperSetter.CurrentWallpaperPath;
         var currentDir = Path.GetDirectoryName(currentPath);
         if (!string.IsNullOrEmpty(currentDir))
