@@ -29,7 +29,7 @@ public record AppSettings
 
     /// <summary>Default list of all available generator style IDs.</summary>
     public static readonly IReadOnlyList<string> DefaultGeneratorStyles =
-        ["BlurBlobs", "LowPoly", "PerlinFlow", "RadialGradient", "GeometricShapes"];
+        ["BlurBlobs", "LowPoly", "RadialGradient", "AuroraWaves", "VoronoiMosaic", "AtmosphericRidges"];
 
     private readonly IReadOnlyList<string>? _selectedGeneratorStyles;
 

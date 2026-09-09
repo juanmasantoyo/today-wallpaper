@@ -20,9 +20,10 @@
 | :--- | :--- | :--- |
 | **BlurBlobs** | Soft Gaussian blobs | **Humidity** controls blur radius; **wind** drives dispersion. |
 | **LowPoly** | Delaunay Triangulation (*Bowyer-Watson*) | **Temperature** modulates chromatic interpolation across facets. |
-| **PerlinFlow** | Continuous 2D noise vector fields | **Wind speed** governs particle path length and dynamism. |
 | **RadialGradient** | Harmonic concentric gradients | **Cloud cover** scales atmospheric light diffusion. |
-| **GeometricShapes** | Euclidean composition & alpha blending | **Wind and pressure** rotate and distribute polygons. |
+| **AuroraWaves** | Flowing Bézier atmospheric ribbons | **Wind speed** governs wave frequency and amplitude; **humidity** controls glow. |
+| **VoronoiMosaic** | Crystalline Voronoi cell facets | **Temperature** shifts virtual lighting source and chromatic highlights. |
+| **AtmosphericRidges** | Layered parallax mountain silhouettes | **Visibility and humidity** control atmospheric depth fog falloff. |
 
 ---
 

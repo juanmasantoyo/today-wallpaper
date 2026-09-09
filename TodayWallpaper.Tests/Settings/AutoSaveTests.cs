@@ -28,9 +28,10 @@ public class AutoSaveTests
             [
                 new BlurBlobsGenerator(Mock.Of<ILogger<BlurBlobsGenerator>>()),
                 new LowPolyGenerator(Mock.Of<ILogger<LowPolyGenerator>>()),
-                new PerlinFlowGenerator(Mock.Of<ILogger<PerlinFlowGenerator>>()),
                 new RadialGradientGenerator(Mock.Of<ILogger<RadialGradientGenerator>>()),
-                new GeometricShapesGenerator(Mock.Of<ILogger<GeometricShapesGenerator>>())
+                new AuroraWavesGenerator(Mock.Of<ILogger<AuroraWavesGenerator>>()),
+                new VoronoiMosaicGenerator(Mock.Of<ILogger<VoronoiMosaicGenerator>>()),
+                new AtmosphericRidgesGenerator(Mock.Of<ILogger<AtmosphericRidgesGenerator>>())
             ],
             Mock.Of<ILogger<WallpaperGeneratorFactory>>());
 

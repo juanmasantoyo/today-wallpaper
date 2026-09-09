@@ -32,6 +32,6 @@ public class ServiceCollectionExtensionsTests
         Assert.NotNull(sp.GetService<IHistoryStore>());
 
         var generators = sp.GetServices<IWallpaperGenerator>().ToList();
-        Assert.Equal(5, generators.Count);
+        Assert.Equal(6, generators.Count);
     }
 }

@@ -35,79 +35,12 @@ public partial class MainWindow : Window
         };
     }
 
-    private async void GenerateNowClick(object sender, RoutedEventArgs e)
-    {
-        if (ViewModel is not null)
-            await ViewModel.GenerateNowAsync();
-    }
-
-    private async void DetectLocationClick(object sender, RoutedEventArgs e)
-    {
-        if (ViewModel is not null)
-            await ViewModel.DetectLocationAsync();
-    }
-
-    private async void RefreshWeatherClick(object sender, RoutedEventArgs e)
-    {
-        if (ViewModel is not null)
-            await ViewModel.RefreshWeatherAsync();
-    }
-
-    private void ApplyClick(object sender, RoutedEventArgs e)
-    {
-        ViewModel?.ApplySelectedWallpaper();
-    }
-
-    private async void PinClick(object sender, RoutedEventArgs e)
-    {
-        if (ViewModel is not null)
-            await ViewModel.TogglePinSelectedAsync();
-    }
-
-    private async void DeleteClick(object sender, RoutedEventArgs e)
-    {
-        if (ViewModel is not null)
-            await ViewModel.DeleteSelectedAsync();
-    }
-
-    private void OpenViewerClick(object sender, RoutedEventArgs e)
-    {
-        ViewModel?.OpenSelectedInViewer();
-    }
-
-    // ── Palette CRUD handlers ────────────────────────────────────────────────
-
-    private void NewPaletteClick(object sender, RoutedEventArgs e)
-    {
-        ViewModel?.AddNewPalette();
-    }
-
-    private void DuplicatePaletteClick(object sender, RoutedEventArgs e)
-    {
-        ViewModel?.DuplicateCurrentPalette();
-    }
-
-    private void DeletePaletteClick(object sender, RoutedEventArgs e)
-    {
-        ViewModel?.DeleteCurrentPalette();
-    }
-
     // ── Color Action handlers ────────────────────────────────────────────────
-
-    private void AddPrimaryColorClick(object sender, RoutedEventArgs e)
-    {
-        ViewModel?.AddPrimaryColor();
-    }
 
     private void RemovePrimaryColorClick(object sender, RoutedEventArgs e)
     {
         if (sender is FrameworkElement { Tag: PaletteColorViewModel item })
             ViewModel?.RemovePrimaryColor(item);
-    }
-
-    private void AddSecondaryColorClick(object sender, RoutedEventArgs e)
-    {
-        ViewModel?.AddSecondaryColor();
     }
 
     private void RemoveSecondaryColorClick(object sender, RoutedEventArgs e)
@@ -128,16 +61,6 @@ public partial class MainWindow : Window
         {
             ViewModel?.PickColor(item);
         }
-    }
-
-    private void ResetConditionClick(object sender, RoutedEventArgs e)
-    {
-        ViewModel?.ResetCurrentConditionPalettes();
-    }
-
-    private void ResetAllPalettesClick(object sender, RoutedEventArgs e)
-    {
-        ViewModel?.ResetAllPalettes();
     }
 
     // ── Drag & Drop between Primary and Secondary Columns ────────────────────
@@ -169,9 +92,27 @@ public partial class MainWindow : Window
                 var colorToDrag = _draggedColor;
                 _draggedColor = null;
 
-                var data = new System.Windows.DataObject(typeof(PaletteColorViewModel), colorToDrag);
-                System.Windows.DragDrop.DoDragDrop(element, data, System.Windows.DragDropEffects.Move);
+                element.Opacity = 0.35;
+                try
+                {
+                    var data = new System.Windows.DataObject(typeof(PaletteColorViewModel), colorToDrag);
+                    System.Windows.DragDrop.DoDragDrop(element, data, System.Windows.DragDropEffects.Move);
+                }
+                finally
+                {
+                    element.Opacity = 1.0;
+                    ResetDropZoneVisuals();
+                }
             }
+        }
+    }
+
+    private void ColorDropZone_DragEnter(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetDataPresent(typeof(PaletteColorViewModel)) && sender is System.Windows.Controls.Border border)
+        {
+            border.Background = TryFindResource("CardSelectedBackgroundBrush") as System.Windows.Media.Brush ?? System.Windows.Media.Brushes.AliceBlue;
+            border.BorderBrush = TryFindResource("AccentBrush") as System.Windows.Media.Brush ?? System.Windows.Media.Brushes.DodgerBlue;
         }
     }
 
@@ -188,8 +129,19 @@ public partial class MainWindow : Window
         }
     }
 
+    private void ColorDropZone_DragLeave(object sender, DragEventArgs e)
+    {
+        if (sender is System.Windows.Controls.Border border)
+        {
+            border.Background = System.Windows.Media.Brushes.Transparent;
+            border.BorderBrush = System.Windows.Media.Brushes.Transparent;
+        }
+    }
+
     private void ColorDropZone_Drop(object sender, DragEventArgs e)
     {
+        ResetDropZoneVisuals();
+
         if (ViewModel?.SelectedPalette is null) return;
 
         if (e.Data.GetData(typeof(PaletteColorViewModel)) is PaletteColorViewModel draggedItem)
@@ -197,6 +149,20 @@ public partial class MainWindow : Window
             bool isDropOnSecondary = sender == SecondaryDropZone;
             ViewModel.MoveColor(draggedItem, toSecondary: isDropOnSecondary);
             e.Handled = true;
+        }
+    }
+
+    private void ResetDropZoneVisuals()
+    {
+        if (PrimaryDropZone is not null)
+        {
+            PrimaryDropZone.Background = System.Windows.Media.Brushes.Transparent;
+            PrimaryDropZone.BorderBrush = System.Windows.Media.Brushes.Transparent;
+        }
+        if (SecondaryDropZone is not null)
+        {
+            SecondaryDropZone.Background = System.Windows.Media.Brushes.Transparent;
+            SecondaryDropZone.BorderBrush = System.Windows.Media.Brushes.Transparent;
         }
     }
 }

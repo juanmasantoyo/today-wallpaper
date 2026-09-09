@@ -17,11 +17,11 @@ public sealed class WallpaperSetter(ILogger<WallpaperSetter> logger) : IWallpape
     private static extern int SystemParametersInfo(
         int uAction, int uParam, string lpvParam, int fuWinIni);
 
-    /// <summary>Absolute path where the current wallpaper JPEG is saved.</summary>
+    /// <summary>Absolute path where the current wallpaper image is saved.</summary>
     public static readonly string CurrentWallpaperPath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
         "TodayWallpaper",
-        "current_wallpaper.jpg");
+        "current_wallpaper.png");
 
     /// <inheritdoc/>
     public void Set(string absoluteImagePath)

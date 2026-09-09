@@ -22,12 +22,13 @@ TodayWallpaper is designed to run quietly in the background. Once started, you w
 Opening **Settings** lets you customize the following options:
 
 ### 1. Visual Generator Style
-Choose which abstract art style appears on your desktop:
+Choose which abstract art style appears on your desktop (you can select one or multiple to pick randomly):
 - **BlurBlobs**: Soft Gaussian blobs modulated by ambient humidity.
 - **LowPoly**: Delaunay-triangulated geometric mesh with lighting modulated by temperature.
-- **PerlinFlow**: Streamline vector curves whose speed and length reflect wind patterns.
 - **RadialGradient**: Multi-layered harmonic gradients evoking atmospheric temperature.
-- **GeometricShapes**: Structured geometric compositions with semi-transparent overlapping layers.
+- **AuroraWaves**: Undulating fluid ribbons inspired by northern lights and wind currents.
+- **VoronoiMosaic**: Crystalline Voronoi cell facets with directional ambient light.
+- **AtmosphericRidges**: Minimalist mountain silhouettes with atmospheric depth fog.
 
 ### 2. Location Mode
 - **Automatic (Recommended)**: Resolves your general city location using anonymous IP geolocation (no GPS permissions required).

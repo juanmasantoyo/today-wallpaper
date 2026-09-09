@@ -64,7 +64,7 @@ graph TD
 3. **Critical Constraint**: `LuminanceValidator` ensures all final colors fall within the **20% to 55%** lightness range ($0.20 \le L \le 0.55$). This prevents muddy/overly dark backgrounds (especially in storm conditions) as well as washed-out bright tones, maintaining optimal readability for white Windows desktop icons and fonts.
 
 ### 3. SkiaSharp Rendering
-1. `WallpaperGeneratorFactory` creates the selected generator instance (`BlurBlobs`, `LowPoly`, `PerlinFlow`, `RadialGradient`, or `GeometricShapes`).
+1. `WallpaperGeneratorFactory` creates the selected generator instance (`BlurBlobs`, `LowPoly`, `RadialGradient`, `AuroraWaves`, `VoronoiMosaic`, or `AtmosphericRidges`).
 2. Draws onto an `SKSurface` canvas matching the native resolution of the primary display.
 3. Encodes and writes the result to `%APPDATA%\TodayWallpaper\current_wallpaper.jpg`.
 

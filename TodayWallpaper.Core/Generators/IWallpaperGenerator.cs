@@ -16,7 +16,7 @@ public interface IWallpaperGenerator
     /// <param name="weather">Raw weather data used to modulate composition parameters.</param>
     /// <param name="width">Output image width in pixels.</param>
     /// <param name="height">Output image height in pixels.</param>
-    /// <param name="outputPath">Absolute path for the output JPEG file.</param>
+    /// <param name="outputPath">Absolute path for the output PNG or JPEG image file.</param>
     /// <param name="cancellationToken">Propagates cancellation.</param>
     /// <returns>The <paramref name="outputPath"/> on success.</returns>
     Task<string> GenerateAsync(

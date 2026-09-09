@@ -198,9 +198,10 @@
   <!-- 7. Generator Styles -->
   <data name="GENERATOR_STYLE_BLUR_BLOBS" xml:space="preserve"><value>Blur Blobs</value></data>
   <data name="GENERATOR_STYLE_LOW_POLY" xml:space="preserve"><value>Low Poly</value></data>
-  <data name="GENERATOR_STYLE_PERLIN_FLOW" xml:space="preserve"><value>Perlin Flow</value></data>
   <data name="GENERATOR_STYLE_RADIAL_GRADIENT" xml:space="preserve"><value>Radial Gradient</value></data>
-  <data name="GENERATOR_STYLE_GEOMETRIC_SHAPES" xml:space="preserve"><value>Geometric Shapes</value></data>
+  <data name="GENERATOR_STYLE_AURORA_WAVES" xml:space="preserve"><value>Aurora Waves</value></data>
+  <data name="GENERATOR_STYLE_VORONOI_MOSAIC" xml:space="preserve"><value>Voronoi Mosaic</value></data>
+  <data name="GENERATOR_STYLE_ATMOSPHERIC_RIDGES" xml:space="preserve"><value>Atmospheric Ridges</value></data>
 
   <!-- 8. Palette Configuration -->
   <data name="APP_TAB_PALETTES" xml:space="preserve"><value>Color Palettes</value></data>

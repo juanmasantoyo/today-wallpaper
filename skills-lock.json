@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "dotnet-wpf-design": {
+      "source": "j0ruge/skills_commands_manager",
+      "sourceType": "github",
+      "skillPath": "plugins/dotnet-wpf/skills/dotnet-wpf-design/SKILL.md",
+      "computedHash": "810a41581392a385d61fd121145f59d2ae7d911696a9a28d6bbc8dcf67d75d8a"
+    }
+  }
+}
